@@ -16,9 +16,9 @@ mkdir -p $ROOTFS/{bin,dev/{null,pts,shm},lib,lib64,mnt,proc,root,sys,tmp}
 
 # build and install pacakges
 
-PACKAGES=(glibc ion coreutils)
+PACKAGES=(glibc ion coreutils ripgrep)
 
-for p in $PACKAGES; do
+for p in ${PACKAGES[@]}; do
   source $PACKAGES_DIR/$p/build.sh
   WORK_DIR=$BUILD_DIR/$p
   mkdir -p $WORK_DIR
