@@ -16,7 +16,8 @@ mkdir -p $ROOTFS/{bin,dev/{null,pts,shm},lib,lib64,mnt,proc,root,sys,tmp}
 
 # build and install pacakges
 
-PACKAGES=(glibc ion coreutils ripgrep)
+# PACKAGES=(glibc ion coreutils ripgrep fd-find)
+PACKAGES=(fd-find)
 
 for p in ${PACKAGES[@]}; do
   source $PACKAGES_DIR/$p/build.sh
