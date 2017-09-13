@@ -1,0 +1,26 @@
+#!/bin/bash
+
+set -xe
+
+startdir=$(pwd)
+buildroot="$startdir/build"
+
+prepare() { :; }
+build() { :; }
+package() { :; }
+
+. $1
+
+srcdir="$buildroot/src/$pkgname"
+builddir="$buildroot/bld/$pkgname"
+pkgdir="$buildroot/pkg/$pkgname"
+outdir="$buildroot/out"
+
+rm -rf $srcdir $builddir $pkgdir
+mkdir -p $srcdir $builddir $pkgdir $outdir
+
+cd $buildroot && prepare
+cd $buildroot && build
+cd $buildroot && package
+
+tar cvfJ $outdir/$pkgname.tar.xz -C $pkgdir .
