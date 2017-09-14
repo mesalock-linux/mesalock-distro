@@ -20,6 +20,5 @@ for p in ${packages[@]}; do
 done
 
 install -D -m755 /lib/x86_64-linux-gnu/libgcc_s.so.1 -t $rootfs/usr/lib/
-cat /etc/timezone > $rootfs/etc/timezone
 
 tar cvfJ $dockerdir/rootfs.tar.xz -C $rootfs .
