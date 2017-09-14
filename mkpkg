@@ -4,12 +4,13 @@ set -xe
 
 startdir=$(pwd)
 buildroot="$startdir/build"
+pkgrepo=$(pwd)/packages
 
 prepare() { :; }
 build() { :; }
 package() { :; }
 
-. $1
+. $pkgrepo/$1/BUILD
 
 srcdir="$buildroot/src/$pkgname"
 builddir="$buildroot/bld/$pkgname"
@@ -18,6 +19,7 @@ outdir="$buildroot/out"
 
 rm -rf $srcdir $builddir $pkgdir
 mkdir -p $srcdir $builddir $pkgdir $outdir
+
 
 cd $buildroot && prepare
 cd $buildroot && build
