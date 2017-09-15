@@ -7,13 +7,13 @@ export MAKEFLAGS=-j$(nproc)
 rootfs=$(pwd)/rootfs
 dockerdir=$(pwd)/docker
 
-packages=(filesystem glibc ion coreutils ripgrep fd-find tzdata)
+packages=(filesystem glibc ion uutils ripgrep fd-find tzdata xi-core xi-tui)
 
-rm -rf rootfs
 for p in ${packages[@]}; do
   ./mkpkg $p
 done
 
+rm -rf $rootfs
 mkdir -p $rootfs
 for p in ${packages[@]}; do
   tar xvfJ build/out/$p.tar.xz -C rootfs
