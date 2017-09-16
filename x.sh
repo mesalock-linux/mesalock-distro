@@ -17,7 +17,8 @@ packages=(filesystem \
           xi-core \
           xi-tui \
           findutils \
-          tokei)
+          tokei \
+          brotli)
 
 for p in ${packages[@]}; do
   ./mkpkg $p
