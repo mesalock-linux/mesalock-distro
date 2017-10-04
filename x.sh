@@ -9,7 +9,7 @@ dockerdir=$(pwd)/docker
 
 packages=(filesystem \
           glibc \
-          ion \
+          ion-shell \
           uutils \
           ripgrep \
           fd-find \
@@ -18,7 +18,8 @@ packages=(filesystem \
           xi-tui \
           findutils \
           tokei \
-          brotli)
+          brotli \
+          micro)
 
 for p in ${packages[@]}; do
   ./mkpkg $p
