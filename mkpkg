@@ -2,6 +2,8 @@
 
 set -xe
 
+export MAKEFLAGS=-j$(nproc)
+
 startdir=$(pwd)
 buildroot="$startdir/build"
 pkgrepo=$(pwd)/packages
@@ -20,9 +22,8 @@ outdir="$buildroot/out"
 rm -rf $srcdir $builddir $pkgdir
 mkdir -p $srcdir $builddir $pkgdir $outdir
 
-
-cd $buildroot && prepare
-cd $buildroot && build
-cd $buildroot && package
+for f in prepare build package; do
+  cd $buildroot && $f
+done
 
 tar cvfJ $outdir/$pkgname.tar.xz -C $pkgdir .
