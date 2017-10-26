@@ -1,0 +1,34 @@
+#!/bin/bash
+
+set -xe
+
+rootfs=$(pwd)/rootfs
+dockerdir=$(pwd)/docker
+isodir=$(pwd)/iso
+buildroot=$(pwd)/build
+
+packages=(filesystem \
+          glibc \
+          ion-shell \
+          uutils \
+          ripgrep \
+          fd-find \
+          tzdata \
+          xi-core \
+          xi-tui \
+          findutils \
+          tokei \
+          brotli \
+          micro)
+
+rm -rf $rootfs
+mkdir -p $rootfs
+for p in ${packages[@]}; do
+  tar xvfJ build/out/$p.tar.xz -C rootfs &
+done
+wait
+
+install -D -m755 /lib/x86_64-linux-gnu/libgcc_s.so.1 -t $rootfs/usr/lib/
+
+echo "[+] Tar and zip rootfs for docker"
+tar cvfJ $dockerdir/rootfs.tar.xz -C $rootfs .
