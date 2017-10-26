@@ -1,0 +1,46 @@
+#!/bin/bash
+
+set -xe
+
+workdir=$(pwd)
+rootfs=$(pwd)/rootfs
+dockerdir=$(pwd)/docker
+isodir=$(pwd)/iso
+buildroot=$(pwd)/build
+
+packages=(linux syslinux)
+
+for p in ${packages[@]}; do
+  tar xvfJ $buildroot/out/$p.tar.xz -C $isodir &
+done
+wait
+
+packages=(filesystem \
+          glibc \
+          ion-shell \
+          uutils \
+          ripgrep \
+          fd-find \
+          tzdata \
+          xi-core \
+          xi-tui \
+          findutils \
+          tokei \
+          brotli \
+          micro)
+
+rm -rf $rootfs
+mkdir -p $rootfs
+for p in ${packages[@]}; do
+  tar xvfJ build/out/$p.tar.xz -C rootfs &
+done
+wait
+
+install -D -m755 /lib/x86_64-linux-gnu/libgcc_s.so.1 -t $rootfs/usr/lib/
+
+echo "[+] Generating initramfs"
+mkdir -p $isodir/boot
+cd $rootfs && find . | sort | fakeroot -- cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
+
+cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R -b boot/syslinux/isolinux.bin -c boot/syslinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -quiet -follow-links iso
+isohybrid mesalock-linux.iso
