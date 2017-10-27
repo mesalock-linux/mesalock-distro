@@ -4,7 +4,4 @@ set -xe
 
 pkgrepo=$(pwd)/packages
 
-for p in `ls $pkgrepo`; do
-  echo "[+] Building $p"
-  ./mkpkg $p
-done
+ls $pkgrepo | parallel -j10 ./mkpkg
