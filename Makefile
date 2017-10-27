@@ -1,9 +1,14 @@
-all:
+all: pkg iso rootfs
+pkg:
 	./x.sh
-build_docker:
+iso:
+	./mesalockiso
+rootfs:
+	./mesalockrootfs
+docker: rootfs
 	sudo docker build --rm -t mssun/mesalock-linux docker
-run_docker:
 	sudo docker run --rm -it mssun/mesalock-linux
 clean:
-	rm -rf rootfs rootfs.tar.xz
 	rm -rf build
+	rm -rf rootfs rootfs.tar.xz
+	rm -rf iso mesalock-linux.iso
