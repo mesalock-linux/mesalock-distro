@@ -3,10 +3,10 @@
 set -xe
 
 workdir=$(pwd)
-rootfs=$(pwd)/rootfs
-dockerdir=$(pwd)/docker
-isodir=$(pwd)/iso
-buildroot=$(pwd)/build
+rootfs=$workdir/rootfs
+dockerdir=$workdir/docker
+isodir=$workdir/iso
+buildroot=$workdir/build
 
 packages=(linux syslinux)
 
@@ -15,9 +15,7 @@ for p in ${packages[@]}; do
 done
 wait
 
-packages=(linux \
-          syslinux \
-          filesystem \
+packages=(filesystem \
           glibc \
           ion-shell \
           uutils \
