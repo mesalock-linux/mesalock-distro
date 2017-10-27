@@ -15,7 +15,9 @@ for p in ${packages[@]}; do
 done
 wait
 
-packages=(filesystem \
+packages=(linux \
+          syslinux \
+          filesystem \
           glibc \
           ion-shell \
           uutils \
