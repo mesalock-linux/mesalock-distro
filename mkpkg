@@ -4,9 +4,9 @@ set -xe
 
 export MAKEFLAGS=-j$(nproc)
 
-startdir=$(pwd)
-buildroot="$startdir/build"
-pkgrepo=$(pwd)/packages
+workdir=$(pwd)
+buildroot=$workdir/build
+pkgrepo=$workdir/packages
 
 prepare() { :; }
 build() { :; }
@@ -14,10 +14,10 @@ package() { :; }
 
 . $pkgrepo/$1/BUILD
 
-srcdir="$buildroot/src/$pkgname"
-builddir="$buildroot/bld/$pkgname"
-pkgdir="$buildroot/pkg/$pkgname"
-outdir="$buildroot/out"
+srcdir=$buildroot/src/$pkgname
+builddir=$buildroot/bld/$pkgname
+pkgdir=$buildroot/pkg/$pkgname
+outdir=$buildroot/out
 
 rm -rf $srcdir $builddir $pkgdir
 mkdir -p $srcdir $builddir $pkgdir $outdir

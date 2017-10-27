@@ -2,10 +2,11 @@
 
 set -xe
 
-rootfs=$(pwd)/rootfs
-dockerdir=$(pwd)/docker
-isodir=$(pwd)/iso
-buildroot=$(pwd)/build
+workdir=$(pwd)
+rootfs=$workdir/rootfs
+dockerdir=$workdir/docker
+isodir=$workdir/iso
+buildroot=$workdir/build
 
 packages=(filesystem \
           glibc \
