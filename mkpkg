@@ -1,7 +1,5 @@
 #!/bin/bash
 
-set -xe
-
 export MAKEFLAGS=-j$(nproc)
 
 workdir=$(pwd)
@@ -22,8 +20,12 @@ outdir=$buildroot/out
 rm -rf $srcdir $builddir $pkgdir
 mkdir -p $srcdir $builddir $pkgdir $outdir
 
+echo "[+} $1: start"
 for f in prepare build package; do
-  cd $buildroot && $f
+  echo "[+] $1: $f"
+  cd $buildroot && $f > /dev/null 2>&1
 done
 
-tar cvfJ $outdir/$pkgname.tar.xz -C $pkgdir .
+echo "[+] $1: tar and zip"
+tar cfJ $outdir/$pkgname.tar.xz -C $pkgdir .
+echo "[+] $1: done"
