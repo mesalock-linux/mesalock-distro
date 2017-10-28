@@ -4,4 +4,4 @@ set -xe
 
 pkgrepo=$(pwd)/packages
 
-ls $pkgrepo | parallel -j10 ./mkpkg
+ls $pkgrepo | parallel --ungroup -j8 ./mkpkg {}
