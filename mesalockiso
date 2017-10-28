@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 
 workdir=$(pwd)
 rootfs=$workdir/rootfs
@@ -8,39 +8,44 @@ dockerdir=$workdir/docker
 isodir=$workdir/iso
 buildroot=$workdir/build
 
+rm -rf $isodir && mkdir -p $isodir
+
 packages=(linux syslinux)
 
 for p in ${packages[@]}; do
-  tar xvfJ $buildroot/out/$p.tar.xz -C $isodir &
+  tar xkfJ $buildroot/out/$p.tar.xz -C $isodir &
 done
 wait
 
 packages=(filesystem \
+          init \
           glibc \
+          gcc-libs \
           ion-shell \
           uutils \
-          ripgrep \
-          fd-find \
-          tzdata \
-          xi-core \
-          xi-tui \
-          findutils \
-          tokei \
-          brotli \
-          micro)
+	 )
+          # ripgrep \
+          # fd-find \
+          # tzdata \
+          # xi-core \
+          # xi-tui \
+          # findutils \
+          # tokei \
+          # brotli \
+          # micro)
 
 rm -rf $rootfs
 mkdir -p $rootfs
+
+echo "[+] mesalockiso: installing rootfs"
 for p in ${packages[@]}; do
-  tar xvfJ build/out/$p.tar.xz -C rootfs &
+  tar xfkJ build/out/$p.tar.xz -C $rootfs
 done
-wait
 
-install -D -m755 /lib/x86_64-linux-gnu/libgcc_s.so.1 -t $rootfs/usr/lib/
-
-echo "[+] Generating initramfs"
+echo "[+] mesalockiso: packaging initramfs"
 mkdir -p $isodir/boot
-cd $rootfs && find . | sort | fakeroot -- cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
+cd $rootfs && find . | sort | cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
 
-cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R -b boot/syslinux/isolinux.bin -c boot/syslinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -quiet -follow-links iso
-isohybrid mesalock-linux.iso
+echo "[+] mesalockiso: generating iso"
+cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R -b boot/syslinux/isolinux.bin -c boot/syslinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -quiet -follow-links iso > /dev/null 2>&1
+isohybrid mesalock-linux.iso > /dev/null

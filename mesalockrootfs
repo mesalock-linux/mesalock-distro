@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -xe
+set -e
 
 workdir=$(pwd)
 rootfs=$workdir/rootfs
@@ -24,12 +24,11 @@ packages=(filesystem \
 
 rm -rf $rootfs
 mkdir -p $rootfs
+
+echo "[+] mesalockrootfs: installing packages"
 for p in ${packages[@]}; do
-  tar xvfJ build/out/$p.tar.xz -C rootfs &
+  tar xkfJ build/out/$p.tar.xz -C rootfs
 done
-wait
 
-install -D -m755 /lib/x86_64-linux-gnu/libgcc_s.so.1 -t $rootfs/usr/lib/
-
-echo "[+] Tar and zip rootfs for docker"
-tar cvfJ $dockerdir/rootfs.tar.xz -C $rootfs .
+echo "[+] mesalockrootfs: tar and zip rootfs"
+tar cfJ $dockerdir/rootfs.tar.xz -C $rootfs .
