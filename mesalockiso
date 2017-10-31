@@ -44,8 +44,14 @@ done
 
 echo "[+] mesalockiso: packaging initramfs"
 mkdir -p $isodir/boot
-cd $rootfs && find . | sort | cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
+cd $rootfs
+find . | sort | cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
 
 echo "[+] mesalockiso: generating iso"
-cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R -b boot/syslinux/isolinux.bin -c boot/syslinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -quiet -follow-links iso > /dev/null 2>&1
+cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R \
+	-b boot/syslinux/isolinux.bin \
+	-c boot/syslinux/boot.cat \
+	-no-emul-boot -boot-load-size 4 -boot-info-table \
+	-quiet -follow-links iso \
+	> /dev/null 2>&1
 isohybrid mesalock-linux.iso > /dev/null
