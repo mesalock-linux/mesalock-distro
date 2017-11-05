@@ -19,10 +19,13 @@ wait
 
 packages=(filesystem \
           minit \
+          mgetty \
           glibc \
           gcc-libs \
           ion-shell \
           uutils \
+	  giproute2 \
+	  busybox \
 	 )
           # ripgrep \
           # fd-find \
@@ -45,7 +48,7 @@ done
 echo "[+] mesalockiso: packaging initramfs"
 mkdir -p $isodir/boot
 cd $rootfs
-find . | sort | cpio --quiet -o -H newc | gzip -9 > $isodir/boot/initramfs
+find . | sort | fakeroot cpio --quiet -o -H newc | pigz -9 > $isodir/boot/initramfs
 
 echo "[+] mesalockiso: generating iso"
 cd $workdir && xorrisofs -o mesalock-linux.iso -l -J -R \
