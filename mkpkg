@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 export MAKEFLAGS=-j$(nproc)
 
 workdir=$(pwd)
@@ -20,10 +22,10 @@ outdir=$buildroot/out
 rm -rf $srcdir $builddir $pkgdir
 mkdir -p $srcdir $builddir $pkgdir $outdir
 
-echo "[+} $1: start"
+echo "[+] $1: start"
 for f in prepare build package; do
   echo "[+] $1: $f"
-  cd $buildroot && $f > /dev/null 2>&1
+  cd $buildroot && $f
 done
 
 echo "[+] $1: tar and zip"
