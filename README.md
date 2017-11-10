@@ -17,15 +17,59 @@ rootfs can be used as the root images of a container.
 #### Build in Docker
 
 We provide a `Dockerfile` for building Mesalock Linux with all dependencies
-installed.
+installed. Build the docker images first and then build packages, live ISO, and
+rootfs in the container.
+
+```
+$ sudo docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
+$ sudo docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
+    -it mesalock-linux/build-mesalock-linux /bin/bash
+```
 
 #### Build on Ubuntu
 
-Install dependencies: TBA
+Install building dependencies:
 
-Install Rust: TBA
+```
+$ # install packages
+$ sudo apt-get update; \
+  sudo apt-get install -q -y --no-install-recommends \
+           curl \
+           git \
+           build-essential \
+           wget \
+           bc \
+           gawk \
+           parallel \
+           pigz \
+           cpio \
+           xorriso \
+           fakeroot \
+           syslinux-utils \
+           uuid-dev \
+           libmpc-dev \
+           libisl-dev \
+           libz-dev \
+           software-properties-common; \
+
+$ # install Go
+$ sudo add-apt-repository -y ppa:gophers/archive; \
+  sudo apt-get update; \
+  sudo apt-get install -q -y --no-install-recommends \
+           golang-1.9-go
+
+$ # install Rust
+$ curl https://sh.rustup.rs -sSf | sh -s -- -y; \
+    rustup default nightly
+
+$ # setup PATH
+$ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
+```
 
 ### Build packages, live ISO, and rootfs
+
+After installing building dependencies, you can run following commands to build
+packages, live ISO, and rootfs.
 
   - First build all packages: `$ ./x.sh -j$(nproc)`
   - Build the live ISO: `$ ./mesalockiso`
@@ -56,8 +100,8 @@ Mesalock Linux in a docker container.
 
 ### Demo: web server
 
-The `mesalock-demo` package provides serveral examples and will be installed
-under the `/root/mesalock-demo` directory. For instance, we made serveral
+The `mesalock-demo` package provides several examples and will be installed
+under the `/root/mesalock-demo` directory. For instance, we made several
 web server demos written in Rocket, which is a web framework written in Rust.
 To try these demos in the VM, please refer to following instructions.
 
@@ -66,7 +110,7 @@ To try these demos in the VM, please refer to following instructions.
      machines. Here we add a new rule to bind host IP (127.0.0.1:8080) with
      guest IP (10.0.2.15:8000).
   2. Start Mesalock Linux.
-  3. Bring up all network devices. Here we use ip command:
+  3. Bring up all network devices. Here we use `ip` command:
     ```
     $ ip link set lo up
     $ ip link set eth0 up
@@ -124,7 +168,7 @@ community. You are very welcome to contribute to the Mesalock Linux project.
 You can get involved in various forms:
 
   - Improving Mesalock Linux: building process, integration issues, etc.
-  - Contibuting to core packages of Mesalock Linux: minit, mgetty, etc.
+  - Contributing to core packages of Mesalock Linux: minit, mgetty, etc.
   - Writing system tools with security in mind: tools written in memory safe
     language such as Rust and Go.
 
