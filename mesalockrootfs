@@ -4,7 +4,7 @@ set -e
 
 workdir=$(pwd)
 rootfs=$workdir/rootfs
-dockerdir=$workdir/docker
+dockerdir=$workdir/mesalockrootfs-dockerfile
 isodir=$workdir/iso
 buildroot=$workdir/build
 
