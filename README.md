@@ -1,14 +1,14 @@
-# Mesalock Linux
+# MesaLock Linux
 
-Mesalock Linux is a general purpose Linux distribution which aims to provide a
+MesaLock Linux is a general purpose Linux distribution which aims to provide a
 safe and secure user space environment. All user space applications are written
 in memory safe programming languages like Rust and Go, even for init and core
 utilities. This extremely reduces attack surfaces of an operating system
 exposed in the wild.
 
-## Build Mesalock Linux
+## Build MesaLock Linux
 
-Currently, Mesalock Linux is provided in live ISO and rootfs. The live ISO image
+Currently, MesaLock Linux is provided in live ISO and rootfs. The live ISO image
 can be used to create a bootable live USB, or boot in a Virtual Machine. The
 rootfs can be used as the root images of a container.
 
@@ -16,13 +16,13 @@ rootfs can be used as the root images of a container.
 
 #### Build in Docker
 
-We provide a `Dockerfile` for building Mesalock Linux with all dependencies
+We provide a `Dockerfile` for building MesaLock Linux with all dependencies
 installed. Build the docker images first and then build packages, live ISO, and
 rootfs in the container.
 
 ```sh
-$ sudo docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
-$ sudo docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
+$ docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
+$ docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
     -it mesalock-linux/build-mesalock-linux /bin/bash
 ```
 
@@ -32,8 +32,8 @@ Install building dependencies:
 
 ```sh
 $ # install packages
-$ sudo apt-get update; \
-  sudo apt-get install -q -y --no-install-recommends \
+$ apt-get update; \
+  apt-get install -q -y --no-install-recommends \
            curl \
            git \
            build-essential \
@@ -53,9 +53,9 @@ $ sudo apt-get update; \
            software-properties-common; \
 
 $ # install Go
-$ sudo add-apt-repository -y ppa:gophers/archive; \
-  sudo apt-get update; \
-  sudo apt-get install -q -y --no-install-recommends \
+$ add-apt-repository -y ppa:gophers/archive; \
+  apt-get update; \
+  apt-get install -q -y --no-install-recommends \
            golang-1.9-go
 
 $ # install Rust
@@ -76,27 +76,27 @@ packages, live ISO, and rootfs.
   - Build the container rootfs: `$ ./mesalockrootfs`
   - Build a specific package only: `$ ./mkpkg <package_name>`
 
-## Try Mesalock Linux
+## Try MesaLock Linux
 
-Mesalock Linux can be run in real devices (e.g., from a Live USB), virtual
+MesaLock Linux can be run in real devices (e.g., from a Live USB), virtual
 machine, and docker container.
 
 ### Virtual machine
 
-You can try Mesalock Linux in Live ISO or docker container. Here are steps to
-try Mesalock Linux in VirtualBox.
+You can try MesaLock Linux in Live ISO or docker container. Here are steps to
+try MesaLock Linux in VirtualBox.
 
   1. Open VirtualBox and "New" a VM.
   2. In the VM settings, choose `mesalock-linux.iso` as "Optical Drive".
-  3. Start the VM and explore Mesalock Linux.
+  3. Start the VM and explore MesaLock Linux.
 
 ### Docker container
 
-We provide a simple `Dockerfile` for Mesalock Linux. Here are steps to try
-Mesalock Linux in a docker container.
+We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
+MesaLock Linux in a docker container.
 
-  1. Build the docker image: `sudo docker build --rm -t mesalock-linux/mesalock-linux docker`
-  2. Run the image: `sudo docker run --rm -it mesalock-linux/mesalock-linux`
+  1. Build the docker image: `docker build --rm -t mesalock-linux/mesalock-linux docker`
+  2. Run the image: `docker run --rm -it mesalock-linux/mesalock-linux`
 
 ### Demo: web server
 
@@ -109,7 +109,7 @@ To try these demos in the VM, please refer to following instructions.
      forwarding function in the advanced settings to bind host and guest
      machines. Here we add a new rule to bind host IP (127.0.0.1:8080) with
      guest IP (10.0.2.15:8000).
-  2. Start Mesalock Linux.
+  2. Start MesaLock Linux.
   3. Bring up all network devices. Here we use `ip` command:
     ```
     $ ip link set lo up
@@ -130,7 +130,7 @@ To try these demos in the VM, please refer to following instructions.
 
 ## Packages
 
-Mesalock Linux provides following packages. All user space applications are
+MesaLock Linux provides following packages. All user space applications are
 written in Rust and Go. The number of packages will increase as the time goes
 on.
 
@@ -161,16 +161,19 @@ on.
 
 ## Contributing
 
-Mesalock Linux is very young and at an early stage. Some important components
+MesaLock Linux is very young and at an early stage. Some important components
 are still missing. Building a safe and secure Linux distro relies on the whole
-community. You are very welcome to contribute to the Mesalock Linux project.
+community. You are very welcome to contribute to the MesaLock Linux project.
 
 You can get involved in various forms:
 
-  - Improving Mesalock Linux: building process, integration issues, etc.
-  - Contributing to core packages of Mesalock Linux: minit, mgetty, etc.
+  - Improving MesaLock Linux: building process, integration issues, etc.
+  - Contributing to core packages of MesaLock Linux: minit, mgetty, etc.
   - Writing system tools with security in mind: tools written in memory safe
     language such as Rust and Go.
 
+## Maintainer
+  - Mingshen Sun `<sunmingshen@baidu.com>`
+
 ## License
-TBA
+BSD
