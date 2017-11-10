@@ -1,10 +1,10 @@
-all: pkg iso rootfs
-pkg:
-	fakeroot ./x.sh
-iso:
-	fakeroot ./mesalockiso
-rootfs:
-	fakeroot ./mesalockrootfs
+all: x iso rootfs
+x: x.sh
+	./x.sh
+iso: mesalockiso
+	./mesalockiso
+rootfs: mesalockrootfs
+	./mesalockrootfs
 docker: rootfs
 	sudo docker build --rm -t mssun/mesalock-linux docker
 	sudo docker run --rm -it mssun/mesalock-linux
