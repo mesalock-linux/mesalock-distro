@@ -90,29 +90,30 @@ Mesalock Linux provides following packages. All user space applications are
 written in Rust and Go. The number of packages will increase as the time goes
 on.
 
-  - brotli
-  - busybox
-  - exa
-  - fd-find
-  - filesystem
-  - gcc-libs
-  - giproute2
-  - glibc
-  - init
-  - ion-shell
-  - linux
-  - mesalock-demo
-  - mgetty
-  - micro
-  - minit
-  - ripgrep
-  - syslinux
-  - tokei
-  - tzdata
-  - uutils-coreutils
-  - uutils-findutils
-  - xi-core
-  - xi-tui
+  - brotli: compression tool written in Rust
+  - busybox: busybox tool set for testing only
+  - exa: replacement for ls written in Rust
+  - fd-find: simple, fast and user-friendly alternative to find
+  - filesystem: base filesystem layout
+  - gcc-libs: GCC library, only libgcc_s.so is used
+  - giproute2: ip tool written in Go
+  - glibc: glibc library
+  - init: init script
+  - ion-shell: shell written in Rust
+  - linux: Linux kernel
+  - mesalock-demo: some demo projects
+  - mgetty: getty written in Rust
+  - micro: modern and intuitive terminal-based text editor in written Go
+  - minit: init written in Rust
+  - ripgrep: ripgrep combines the usability of The Silver Searcher with the raw
+    speed of grep, written in Rust
+  - syslinux: bootloader
+  - tokei: count your code, quickly, in Rust
+  - tzdata: timezone data
+  - uutils-coreutils: cross-platform Rust rewrite of the GNU coreutils
+  - uutils-findutils: rust implementation of findutils
+  - xi-core: a modern editor with a backend written in Rust
+  - xi-tui: a tui frontend for Xi
 
 ## License
 TBA
