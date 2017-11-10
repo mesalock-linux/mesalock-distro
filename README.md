@@ -115,5 +115,18 @@ on.
   - xi-core: a modern editor with a backend written in Rust
   - xi-tui: a tui frontend for Xi
 
+## Contributing
+
+Mesalock Linux is very young and at an early stage. Some important components
+are still missing. Building a safe and secure Linux distro relies on the whole
+community. You are very welcome to contribute to the Mesalock Linux project.
+
+You can get involved in various forms:
+
+  - Improving Mesalock Linux: building process, integration issues, etc.
+  - Contibuting to core packages of Mesalock Linux: minit, mgetty, etc.
+  - Writing system tools with security in mind: tools written in memory safe
+    language such as Rust and Go.
+
 ## License
 TBA
