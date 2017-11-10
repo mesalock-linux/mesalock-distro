@@ -11,13 +11,13 @@ buildroot=$workdir/build
 packages=(filesystem \
           glibc \
           ion-shell \
-          uutils \
+          uutils-coreutils \
           ripgrep \
           fd-find \
           tzdata \
           xi-core \
           xi-tui \
-          findutils \
+          uutils-findutils \
           tokei \
           brotli \
           micro)

@@ -23,16 +23,17 @@ packages=(filesystem \
           glibc \
           gcc-libs \
           ion-shell \
-          uutils \
-	  giproute2 \
-	  busybox \
-	 )
+          uutils-coreutils \
+	      giproute2 \
+	      busybox \
+	      mesalock-demo \
+	     )
           # ripgrep \
           # fd-find \
           # tzdata \
           # xi-core \
           # xi-tui \
-          # findutils \
+          # uutils-findutils \
           # tokei \
           # brotli \
           # micro)
