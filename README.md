@@ -8,7 +8,7 @@ exposed to the wild.
 
 ## Build Mesalock Linux
 
-Currently, Mesalock Linux is provide in live ISO and rootfs. The live ISO image
+Currently, Mesalock Linux is provided in live ISO and rootfs. The live ISO image
 can be used to create a bootable live USB, or boot in a Virtual Machine. The
 rootfs can be used as the root images of a container.
 
