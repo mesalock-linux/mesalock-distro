@@ -4,7 +4,7 @@ Mesalock Linux is a general purpose Linux distribution which aims to provide a
 safe and secure user space environment. All user space applications are written
 in memory safe programming languages like Rust and Go, even for init and core
 utilities. This extremely reduces attack surfaces of an operating system
-exposed to the wild.
+exposed in the wild.
 
 ## Build Mesalock Linux
 
