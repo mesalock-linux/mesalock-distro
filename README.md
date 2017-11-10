@@ -20,7 +20,7 @@ We provide a `Dockerfile` for building Mesalock Linux with all dependencies
 installed. Build the docker images first and then build packages, live ISO, and
 rootfs in the container.
 
-```
+```sh
 $ sudo docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
 $ sudo docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
     -it mesalock-linux/build-mesalock-linux /bin/bash
@@ -30,7 +30,7 @@ $ sudo docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
 
 Install building dependencies:
 
-```
+```sh
 $ # install packages
 $ sudo apt-get update; \
   sudo apt-get install -q -y --no-install-recommends \
