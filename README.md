@@ -6,7 +6,7 @@ in memory safe programming languages like Rust and Go, even for init and core
 utilities. This extremely reduces attack surfaces of an operating system
 exposed in the wild.
 
-## Build MesaLock Linux
+## Building
 
 Currently, MesaLock Linux is provided in live ISO and rootfs. The live ISO image
 can be used to create a bootable live USB, or boot in a Virtual Machine. The
@@ -85,7 +85,7 @@ packages, live ISO, and rootfs.
   - Build the container rootfs: `$ ./mesalockrootfs`
   - Build a specific package only: `$ ./mkpkg <package_name>`
 
-## Try MesaLock Linux
+## Trying
 
 MesaLock Linux can be run in real devices (e.g., from a Live USB), virtual
 machine, and docker container.
