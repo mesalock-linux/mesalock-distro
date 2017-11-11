@@ -19,7 +19,8 @@ rootfs can be used as the root images of a container.
 Clone `mesalock-distro` repositry recursively with its submodules (packages).
 
 ```sh
-$ git clone --recursive http://172.19.62.4/mesalock-linux/mesalock-distro.git && cd mesalock-distro
+$ git clone --recursive http://172.19.62.4/mesalock-linux/mesalock-distro.git
+$ cd mesalock-distro
 ```
 
 #### Build in Docker
