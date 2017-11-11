@@ -80,7 +80,7 @@ $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
 After installing building dependencies, you can run following commands to build
 packages, live ISO, and rootfs.
 
-  - First build all packages: `./x.sh -j$(nproc)`
+  - First build all packages: `./mkpkg`
   - Build the live ISO: `./mesalockiso`
   - Build the container rootfs: `./mesalockrootfs`
   - Build a specific package only: `./mkpkg <package_name>`
