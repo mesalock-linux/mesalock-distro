@@ -80,10 +80,13 @@ $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
 After installing building dependencies, you can run following commands to build
 packages, live ISO, and rootfs.
 
-  - First build all packages: `$ ./x.sh -j$(nproc)`
-  - Build the live ISO: `$ ./mesalockiso`
-  - Build the container rootfs: `$ ./mesalockrootfs`
-  - Build a specific package only: `$ ./mkpkg <package_name>`
+  - First build all packages: `./x.sh -j$(nproc)`
+  - Build the live ISO: `./mesalockiso`
+  - Build the container rootfs: `./mesalockrootfs`
+  - Build a specific package only: `./mkpkg <package_name>`
+
+The live ISO (`mesalock-linux.iso`) and rootfs (`rootfs.tar.gz`) can be found
+in the `build` directory.
 
 ## Trying
 
@@ -104,10 +107,11 @@ try MesaLock Linux in VirtualBox.
 We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
 MesaLock Linux in a docker container.
 
-  1. Build the docker image: `docker build --rm -t mesalock-linux/mesalock-linux docker`
-  2. Run the image: `docker run --rm -it mesalock-linux/mesalock-linux`
+  1. Copy rootfs into the docker directory: `cp build/rootfs.tar.gz mesalockrootfs-dockerfile/`
+  2. Build the docker image: `docker build --rm -t mesalock-linux/mesalock-linux mesalockrootfs-dockerfile`
+  3. Run the image: `docker run --rm -it mesalock-linux/mesalock-linux`
 
-### Demo: web server
+### Example: run a web server
 
 The `mesalock-demo` package provides several examples and will be installed
 under the `/root/mesalock-demo` directory. For instance, we made several
