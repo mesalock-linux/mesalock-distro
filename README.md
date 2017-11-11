@@ -191,4 +191,4 @@ You can get involved in various forms:
 
 ## License
 
-BSD
+MesaLock Linux is provided under the [BSD license](LICENSE).
