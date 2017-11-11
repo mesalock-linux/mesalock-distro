@@ -3,20 +3,21 @@
 set -e
 
 workdir=$(pwd)
-rootfs=$workdir/rootfs
-dockerdir=$workdir/docker
-isodir=$workdir/iso
-buildroot=$workdir/build
+builddir=$(pwd)/build
+rootfsdir=$builddir/rootfs
+isodir=$builddir/iso
 
 rm -rf $isodir && mkdir -p $isodir
 
+echo "[+] mesalockiso: installing bootloader and kernel"
 packages=(linux syslinux)
 
 for p in ${packages[@]}; do
-  tar xkfJ $buildroot/out/$p.tar.xz -C $isodir &
+  tar xkfJ $builddir/out/$p.tar.xz -C $isodir &
 done
 wait
 
+echo "[+] mesalockiso: installing rootfs"
 packages=(filesystem \
           minit \
           mgetty \
@@ -38,17 +39,15 @@ packages=(filesystem \
           # brotli \
           # micro)
 
-rm -rf $rootfs
-mkdir -p $rootfs
+rm -rf $rootfsdir && mkdir -p $rootfsdir
 
-echo "[+] mesalockiso: installing rootfs"
 for p in ${packages[@]}; do
-  tar xfkJ build/out/$p.tar.xz -C $rootfs
+  tar xfkJ build/out/$p.tar.xz -C $rootfsdir
 done
 
 echo "[+] mesalockiso: packaging initramfs"
 mkdir -p $isodir/boot
-cd $rootfs
+cd $rootfsdir
 find . | sort | fakeroot cpio --quiet -o -H newc | pigz -9 > $isodir/boot/initramfs
 
 echo "[+] mesalockiso: generating iso"

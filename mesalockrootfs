@@ -3,11 +3,12 @@
 set -e
 
 workdir=$(pwd)
-rootfs=$workdir/rootfs
+builddir=$(pwd)/build
+rootfsdir=$builddir/rootfs
 dockerdir=$workdir/mesalockrootfs-dockerfile
-isodir=$workdir/iso
-buildroot=$workdir/build
+isodir=$builddir/iso
 
+echo "[+] mesalockrootfs: installing packages"
 packages=(filesystem \
           glibc \
           ion-shell \
@@ -22,13 +23,12 @@ packages=(filesystem \
           brotli \
           micro)
 
-rm -rf $rootfs
-mkdir -p $rootfs
+rm -rf $rootfsdir
+mkdir -p $rootfsdir
 
-echo "[+] mesalockrootfs: installing packages"
 for p in ${packages[@]}; do
-  tar xkfJ build/out/$p.tar.xz -C rootfs
+  tar xkfJ $builddir/out/$p.tar.xz -C $rootfsdir
 done
 
 echo "[+] mesalockrootfs: tar and zip rootfs"
-tar cfJ $dockerdir/rootfs.tar.xz -C $rootfs .
+tar cfJ $builddir/rootfs.tar.xz -C $rootfsdir .
