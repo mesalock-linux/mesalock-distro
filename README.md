@@ -40,7 +40,7 @@ Install building dependencies:
 
 ```sh
 $ # install packages
-$ apt-get update; \
+$ apt-get update && \
   apt-get install -q -y --no-install-recommends \
            curl \
            git \
@@ -58,16 +58,16 @@ $ apt-get update; \
            libmpc-dev \
            libisl-dev \
            libz-dev \
-           software-properties-common; \
+           software-properties-common
 
 $ # install Go
-$ add-apt-repository -y ppa:gophers/archive; \
-  apt-get update; \
+$ add-apt-repository -y ppa:gophers/archive && \
+  apt-get update && \
   apt-get install -q -y --no-install-recommends \
            golang-1.9-go
 
 $ # install Rust
-$ curl https://sh.rustup.rs -sSf | sh -s -- -y; \
+$ curl https://sh.rustup.rs -sSf | sh -s -- -y && \
     rustup default nightly
 
 $ # setup PATH
