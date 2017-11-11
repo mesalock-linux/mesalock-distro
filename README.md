@@ -182,7 +182,9 @@ You can get involved in various forms:
     language such as Rust and Go.
 
 ## Maintainer
+
   - Mingshen Sun `<sunmingshen@baidu.com>`
 
 ## License
+
 BSD
