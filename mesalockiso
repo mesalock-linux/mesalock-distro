@@ -24,10 +24,10 @@ packages=(filesystem \
           gcc-libs \
           ion-shell \
           uutils-coreutils \
-	      giproute2 \
-	      busybox \
-	      mesalock-demo \
-	     )
+          giproute2 \
+          busybox \
+          mesalock-demo \
+         )
           # ripgrep \
           # fd-find \
           # tzdata \
