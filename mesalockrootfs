@@ -5,8 +5,6 @@ set -e
 workdir=$(pwd)
 builddir=$(pwd)/build
 rootfsdir=$builddir/rootfs
-dockerdir=$workdir/mesalockrootfs-dockerfile
-isodir=$builddir/iso
 
 echo "[+] mesalockrootfs: installing packages"
 packages=(filesystem \
