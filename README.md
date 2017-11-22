@@ -8,9 +8,10 @@ exposed in the wild.
 
 ## Building
 
-Currently, MesaLock Linux is provided in live ISO and rootfs. The live ISO image
-can be used to create a bootable live USB, or boot in a Virtual Machine. The
-rootfs can be used as the root images of a container.
+Currently, MesaLock Linux is provided in two versions: live ISO and rootfs. The
+live ISO image can be used to create a bootable live USB, or boot in a virtual
+machine. The rootfs (i.e., root file system) can be used as a minimal root
+image for a container.
 
 ### Requirements
 
@@ -26,8 +27,8 @@ $ cd mesalock-distro
 #### Build in Docker
 
 We provide a `Dockerfile` for building MesaLock Linux with all dependencies
-installed. Build the docker images first and then build packages, live ISO, and
-rootfs in the container.
+installed. Please build the docker image first and then in the building container
+environment, you can build packages, live ISO, and rootfs.
 
 ```sh
 $ docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
@@ -37,7 +38,8 @@ $ docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
 
 #### Build on Ubuntu
 
-Install building dependencies:
+You can also build a Ubuntu machine, please install these building dependencies
+first:
 
 ```sh
 $ # install packages
@@ -90,13 +92,13 @@ in the `build` directory.
 
 ## Trying
 
-MesaLock Linux can be run in real devices (e.g., from a Live USB), virtual
-machine, and docker container.
+MesaLock Linux can be run in real devices (e.g., boot from a Live USB), virtual
+machines, and docker containers.
 
 ### Virtual machine
 
-You can try MesaLock Linux in Live ISO or docker container. Here are steps to
-try MesaLock Linux in VirtualBox.
+You can try MesaLock Linux with Live ISO or in a docker container. Here are
+steps to try MesaLock Linux in VirtualBox.
 
   1. Open VirtualBox and "New" a VM.
   2. In the VM settings, choose `mesalock-linux.iso` as "Optical Drive".
@@ -109,14 +111,15 @@ MesaLock Linux in a docker container.
 
   1. Copy rootfs into the docker directory: `cp build/rootfs.tar.gz mesalockrootfs-dockerfile/`
   2. Build the docker image: `docker build --rm -t mesalock-linux/mesalock-linux mesalockrootfs-dockerfile`
-  3. Run the image: `docker run --rm -it mesalock-linux/mesalock-linux`
+  3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalock-linux/mesalock-linux`
 
-### Example: run a web server
+### Example: hosting web servers
 
 The `mesalock-demo` package provides several examples and will be installed
-under the `/root/mesalock-demo` directory. For instance, we made several
-web server demos written in Rocket, which is a web framework written in Rust.
-To try these demos in the VM, please refer to following instructions.
+under the `/root/mesalock-demo` directory. For instance, we made several web
+server demos written in [Rocket](https://github.com/SergioBenitez/Rocket/),
+which is a web framework written in Rust.  To try these demos in the VM, please
+follow these instructions.
 
   1. In the VM settings, select "NAT" for network adapter and use port
      forwarding function in the advanced settings to bind host and guest
@@ -143,9 +146,9 @@ To try these demos in the VM, please refer to following instructions.
 
 ## Packages
 
-MesaLock Linux provides following packages. All user space applications are
-written in Rust and Go. The number of packages will increase as the time goes
-on.
+MesaLock Linux provides many packages with memory safety in mind. All user
+space applications are written in Rust and Go. The number of packages will
+increase as the time goes on.
 
   - `brotli`: compression tool written in Rust
   - `busybox`: busybox tool set for testing only
