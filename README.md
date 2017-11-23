@@ -156,15 +156,15 @@ increase as the time goes on.
   - `fd-find`: simple, fast and user-friendly alternative to find
   - `filesystem`: base filesystem layout
   - `gcc-libs`: GCC library, only libgcc_s.so is used
-  - `giproute2`: ip tool written in Go
+  - `giproute2`: ip tool written in Go (maintained by MesaLock Linux)
   - `glibc`: glibc library
   - `init`: init script
   - `ion-shell`: shell written in Rust
   - `linux`: Linux kernel
-  - `mesalock-demo`: some demo projects
-  - `mgetty`: getty written in Rust
+  - `mesalock-demo`: some demo projects (maintained by MesaLock Linux)
+  - `mgetty`: getty written in Rust (maintained by MesaLock Linux)
   - `micro`: modern and intuitive terminal-based text editor in written Go
-  - `minit`: init written in Rust
+  - `minit`: init written in Rust (maintained by MesaLock Linux)
   - `ripgrep`: ripgrep combines the usability of The Silver Searcher with the raw
     speed of grep, written in Rust
   - `syslinux`: bootloader
