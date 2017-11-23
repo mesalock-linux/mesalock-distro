@@ -2,9 +2,9 @@
 
 set -e
 
-workdir=$(pwd)
-builddir=$(pwd)/build
-rootfsdir=$builddir/rootfs
+workdir="$(pwd)"
+builddir="$(pwd)/build"
+rootfsdir="$builddir/rootfs"
 
 echo "[+] mesalockrootfs: installing packages"
 packages=(filesystem \
@@ -21,12 +21,12 @@ packages=(filesystem \
           brotli \
           micro)
 
-rm -rf $rootfsdir
-mkdir -p $rootfsdir
+rm -rf "$rootfsdir"
+mkdir -p "$rootfsdir"
 
-for p in ${packages[@]}; do
-  tar xkfJ $builddir/out/$p.tar.xz -C $rootfsdir
+for p in "${packages[@]}"; do
+  tar xkfJ "$builddir/out/$p.tar.xz" -C "$rootfsdir"
 done
 
 echo "[+] mesalockrootfs: tar and zip rootfs"
-tar cfJ $builddir/rootfs.tar.xz -C $rootfsdir .
+tar cfJ "$builddir/rootfs.tar.xz" -C "$rootfsdir" .

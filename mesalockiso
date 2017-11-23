@@ -2,18 +2,18 @@
 
 set -e
 
-workdir=$(pwd)
-builddir=$(pwd)/build
-rootfsdir=$builddir/rootfs
-isodir=$builddir/iso
+workdir="$(pwd)"
+builddir="$(pwd)/build"
+rootfsdir="$builddir/rootfs"
+isodir="$builddir/iso"
 
-rm -rf $isodir && mkdir -p $isodir
+rm -rf "$isodir" && mkdir -p "$isodir"
 
 echo "[+] mesalockiso: installing bootloader and kernel"
 packages=(linux syslinux)
 
-for p in ${packages[@]}; do
-  tar xkfJ $builddir/out/$p.tar.xz -C $isodir &
+for p in "${packages[@]}"; do
+  tar xkfJ "$builddir/out/$p.tar.xz" -C "$isodir" &
 done
 wait
 
@@ -39,19 +39,19 @@ packages=(filesystem \
           # brotli \
           # micro)
 
-rm -rf $rootfsdir && mkdir -p $rootfsdir
+rm -rf "$rootfsdir" && mkdir -p "$rootfsdir"
 
-for p in ${packages[@]}; do
-  tar xfkJ build/out/$p.tar.xz -C $rootfsdir
+for p in "${packages[@]}"; do
+  tar xfkJ "build/out/$p.tar.xz" -C "$rootfsdir"
 done
 
 echo "[+] mesalockiso: packaging initramfs"
-mkdir -p $isodir/boot
-cd $rootfsdir
-find . | sort | fakeroot cpio --quiet -o -H newc | pigz -9 > $isodir/boot/initramfs
+mkdir -p "$isodir/boot"
+cd "$rootfsdir"
+find . | sort | fakeroot cpio --quiet -o -H newc | pigz -9 > "$isodir/boot/initramfs"
 
 echo "[+] mesalockiso: generating iso"
-cd $builddir && xorrisofs -o mesalock-linux.iso -l -J -R \
+cd "$builddir" && xorrisofs -o mesalock-linux.iso -l -J -R \
 	-b boot/syslinux/isolinux.bin \
 	-c boot/syslinux/boot.cat \
 	-no-emul-boot -boot-load-size 4 -boot-info-table \

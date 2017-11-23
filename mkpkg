@@ -4,41 +4,41 @@ set -e
 
 export MAKEFLAGS=-j$(nproc)
 
-workdir=$(pwd)
-buildroot=$workdir/build
-pkgrepo=$workdir/packages
+workdir="$(pwd)"
+buildroot="$workdir/build"
+pkgrepo="$workdir/packages"
 
 mkpkg() {
   prepare() { :; }
   build() { :; }
   package() { :; }
 
-  . $pkgrepo/$1/BUILD
+  . "$pkgrepo/$1/BUILD"
   
-  srcdir=$buildroot/src/$pkgname
-  builddir=$buildroot/bld/$pkgname
-  pkgdir=$buildroot/pkg/$pkgname
-  outdir=$buildroot/out
+  srcdir="$buildroot/src/$pkgname"
+  builddir="$buildroot/bld/$pkgname"
+  pkgdir="$buildroot/pkg/$pkgname"
+  outdir="$buildroot/out"
   
-  rm -rf $srcdir $builddir $pkgdir
-  mkdir -p $srcdir $builddir $pkgdir $outdir
+  rm -rf "$srcdir" "$builddir" "$pkgdir"
+  mkdir -p "$srcdir" "$builddir" "$pkgdir" "$outdir"
   
   echo "[+] $1: start"
   for f in prepare build package; do
     echo "[+] $1: $f"
-    cd $buildroot && $f
+    cd "$buildroot" && "$f"
   done
   
   echo "[+] $1: tar and zip"
-  tar cfJ $outdir/$pkgname.tar.xz -C $pkgdir .
+  tar cfJ "$outdir/$pkgname.tar.xz" -C "$pkgdir" .
   echo "[+] $1: done"
 }
 
-if [[ $# -eq 0 ]] ; then
+if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
-  ls $pkgrepo | parallel --ungroup -j$(nproc) ./mkpkg {}
+  ls "$pkgrepo" | parallel --ungroup "-j$(nproc)" ./mkpkg {}
 else
-  for pkg in $@; do
-      mkpkg $pkg
+  for pkg in "$@"; do
+      mkpkg "$pkg"
   done
 fi
