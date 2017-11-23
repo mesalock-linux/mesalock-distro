@@ -31,7 +31,6 @@ packages=(filesystem \
           ion-shell \
           uutils-coreutils \
           giproute2 \
-          busybox \
           mesalock-demo \
          )
           # ripgrep \
