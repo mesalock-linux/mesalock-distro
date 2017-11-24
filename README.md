@@ -147,33 +147,34 @@ follow these instructions.
 ## Packages
 
 MesaLock Linux provides many packages with memory safety in mind. All user
-space applications are written in Rust and Go. The number of packages will
-increase as the time goes on.
+space applications are written in Rust and Go. Thanks to the open source
+community, they have crated many useful and high-quality tools. The number of
+packages will increase as the time goes on.
 
-  - `brotli`: compression tool written in Rust
-  - `busybox`: busybox tool set for testing only
-  - `exa`: replacement for ls written in Rust
-  - `fd-find`: simple, fast and user-friendly alternative to find
-  - `filesystem`: base filesystem layout
-  - `gcc-libs`: GCC library, only libgcc_s.so is used
+  - `brotli`: compression tool written in Rust ([dropbox/rust-brotli](https://github.com/dropbox/rust-brotli))
+  - `busybox`: busybox tool set for testing only ([busybox](https://busybox.net))
+  - `exa`: replacement for ls written in Rust ([ogham/exa](https://the.exa.website))
+  - `fd-find`: simple, fast and user-friendly alternative to find ([sharkdp/fd](https://github.com/sharkdp/fd))
+  - `filesystem`: base filesystem layout (maintained by MesaLock Linux)
+  - `gcc-libs`: GCC library, only libgcc_s.so is used ([gcc](https://gcc.gnu.org/))
   - `giproute2`: ip tool written in Go (maintained by MesaLock Linux)
-  - `glibc`: glibc library
-  - `init`: init script
-  - `ion-shell`: shell written in Rust
-  - `linux`: Linux kernel
+  - `glibc`: the GNU C library ([glibc](https://www.gnu.org/software/libc/))
+  - `init`: init script (maintained by MesaLock Linux)
+  - `ion-shell`: shell written in Rust ([redox-os/ion](https://github.com/redox-os/ion))
+  - `linux`: Linux kernel ([linux](https://www.kernel.org/))
   - `mesalock-demo`: some demo projects (maintained by MesaLock Linux)
   - `mgetty`: getty written in Rust (maintained by MesaLock Linux)
-  - `micro`: modern and intuitive terminal-based text editor in written Go
+  - `micro`: modern and intuitive terminal-based text editor in written Go ([zyedidia/micro](https://github.com/zyedidia/micro))
   - `minit`: init written in Rust (maintained by MesaLock Linux)
   - `ripgrep`: ripgrep combines the usability of The Silver Searcher with the raw
-    speed of grep, written in Rust
-  - `syslinux`: bootloader
-  - `tokei`: count your code, quickly, in Rust
-  - `tzdata`: timezone data
-  - `uutils-coreutils`: cross-platform Rust rewrite of the GNU coreutils
-  - `uutils-findutils`: rust implementation of findutils
-  - `xi-core`: a modern editor with a backend written in Rust
-  - `xi-tui`: a tui frontend for Xi
+    speed of grep, written in Rust ([BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep))
+  - `syslinux`: bootloader ([syslinux](http://www.syslinux.org/wiki/index.php?title=The_Syslinux_Project))
+  - `tokei`: count your code, quickly, in Rust ([Aaronepower/tokei](https://github.com/Aaronepower/tokei))
+  - `tzdata`: timezone data ([tzdata](https://www.iana.org/time-zones))
+  - `uutils-coreutils`: cross-platform Rust rewrite of the GNU coreutils ([uutils/coreutils](https://github.com/uutils/coreutils))
+  - `uutils-findutils`: rust implementation of findutils ([uutils/findutils](https://github.com/uutils/findutils))
+  - `xi-core`: a modern editor with a backend written in Rust ([google/xi-editor](https://github.com/google/xi-editor))
+  - `xi-tui`: a tui frontend for Xi ([little-dude/xi-tui](https://github.com/little-dude/xi-tui))
 
 ## Contributing
 
