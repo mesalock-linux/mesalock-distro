@@ -12,6 +12,17 @@ main usage scenarios of MesaLock Linux are docker image and security sensitive
 embedded devices. With the development and maturity of the ecosystem, MesaLock
 Linux can be also adopted in the server environment.
 
+To get better functionality along with strong security guarantees, MesaLock
+Linux follows the following rules-of-thumb for hybrid memory-safe architecture
+designing proposed by the [Rust SGX SDK](https://github.com/baidu/rust-sgx-sdk)
+project.
+
+1. Unsafe components should be appropriately isolated and modularized, and the
+   size should be small (or minimized).
+2. Unsafe components should not weaken the safe, especially, public APIs and
+   data structures.
+3. Unsafe components should be clearly identified and easily upgraded.
+
 ## Building
 
 Currently, MesaLock Linux is provided in two versions: live ISO and rootfs. The
