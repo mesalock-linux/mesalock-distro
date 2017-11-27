@@ -14,6 +14,7 @@ rootfsdir="$builddir/rootfs"
 echo "[+] mesalockrootfs: installing packages"
 packages=(filesystem \
           glibc \
+          gcc-libs \
           ion-shell \
           uutils-coreutils \
           ripgrep \
@@ -24,7 +25,8 @@ packages=(filesystem \
           uutils-findutils \
           tokei \
           brotli \
-          micro)
+          micro \
+          mesalock-demo)
 
 rm -rf "$rootfsdir"
 mkdir -p "$rootfsdir"
