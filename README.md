@@ -23,6 +23,16 @@ project.
    data structures.
 3. Unsafe components should be clearly identified and easily upgraded.
 
+
+## Quick Start
+
+You can quickly experience MesaLock Linux in the container environment using
+Docker.
+
+```sh
+$ docker run -it mesalocklinux/mesalock-linux
+```
+
 ## Building
 
 Currently, MesaLock Linux is provided in two versions: live ISO and rootfs. The
