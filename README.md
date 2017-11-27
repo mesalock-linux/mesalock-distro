@@ -44,14 +44,18 @@ $ cd mesalock-distro
 #### Build in Docker
 
 We provide a `Dockerfile` for building MesaLock Linux with all dependencies
-installed. Please build the docker image first and then in the building container
-environment, you can build packages, live ISO, and rootfs.
+installed. You can build the docker image first and then in the building
+container environment, you can build packages, live ISO, and rootfs.
 
 ```sh
-$ docker build -t mesalock-linux/build-mesalock-linux --rm build-dockerfile
+$ docker build -t mesalocklinux/build-mesalock-linux --rm build-dockerfile
 $ docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
-    -it mesalock-linux/build-mesalock-linux /bin/bash
+    -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
+
+The image of building environment are also provided from [Docker
+Hub](https://hub.docker.com/r/mesalocklinux/build-mesalock-linux/). You can
+pull and run the container with the repo name `mesalocklinux/build-mesalock-linux`.
 
 #### Build on Ubuntu
 
@@ -127,8 +131,12 @@ We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
 MesaLock Linux in a docker container.
 
   1. Copy rootfs into the docker directory: `cp build/rootfs.tar.gz mesalockrootfs-dockerfile/`
-  2. Build the docker image: `docker build --rm -t mesalock-linux/mesalock-linux mesalockrootfs-dockerfile`
-  3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalock-linux/mesalock-linux`
+  2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux mesalockrootfs-dockerfile`
+  3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalocklinux/mesalock-linux`
+
+The latest rootfs image with all pacakges are pushed to [Docker
+Hub](https://hub.docker.com/r/mesalocklinux/mesalock-linux/). You can also
+directly run the image with the repo name `mesalocklinux/mesalock-linux`.
 
 ### Example: hosting web servers
 
