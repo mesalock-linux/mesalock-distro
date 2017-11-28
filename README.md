@@ -214,15 +214,16 @@ packages will increase as the time goes on.
 ## Contributing
 
 MesaLock Linux is very young and at an early stage. Some important components
-are still missing. Building a safe and secure Linux distro relies on the whole
-community. You are very welcome to contribute to the MesaLock Linux project.
+are still missing or work-in-progress. Building a safe and secure Linux distro
+relies on the whole community, and you are very welcome to contribute to the
+MesaLock Linux project.
 
 You can get involved in various forms:
 
   - Improving MesaLock Linux: building process, integration issues, etc.
   - Contributing to core packages of MesaLock Linux: minit, mgetty, etc.
   - Writing system tools with security in mind: tools written in memory safe
-    language such as Rust and Go.
+    languages such as Rust and Go.
 
 ## Maintainer
 
