@@ -221,10 +221,14 @@ MesaLock Linux project.
 
 You can get involved in various forms:
 
-  - Improving MesaLock Linux: building process, integration issues, etc.
-  - Contributing to core packages of MesaLock Linux: minit, mgetty, etc.
-  - Writing system tools with security in mind: tools written in memory safe
-    languages such as Rust and Go.
+  - Try to use MesaLock Linux, report issue, enhancement suggestions, etc
+  - Contribute to MesaLock Linux: optimize development process, improve
+    documents, closing issues, etc
+  - Contribute to core packages of MesaLock Linux: improving `minit`, `mgetty`,
+    `giproute2`, etc
+  - Writing applications using memory safe programming languages like Rust/Go,
+    and joining the the MesaLock Linux packages
+  - Auditing source code of the MesaLock Linux projects and related packages
 
 ## Maintainer
 
