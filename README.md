@@ -1,3 +1,5 @@
+<p align="center"><img src="img/logo.png" height="64" /></p>
+
 # MesaLock Linux
 
 MesaLock Linux is a general purpose Linux distribution which aims to provide a
