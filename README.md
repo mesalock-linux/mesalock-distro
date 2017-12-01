@@ -1,6 +1,6 @@
 <p align="center"><img src="img/logo.png" height="64" /></p>
 
-# MesaLock Linux
+# MesaLock Linux: A Memory-Safe Linux Distribution
 
 MesaLock Linux is a general purpose Linux distribution which aims to provide a
 *safe* and *secure* user space environment. To eliminate high-severe
