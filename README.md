@@ -50,7 +50,7 @@ image for a container.
 Clone `mesalock-distro` repositry recursively with its submodules (packages).
 
 ```sh
-$ git clone --recursive http://172.19.62.4/mesalock-linux/mesalock-distro.git
+$ git clone --recursive https://github.com/mesalock-linux/mesalock-distro.git
 $ cd mesalock-distro
 ```
 
