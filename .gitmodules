@@ -1,4 +1,4 @@
 [submodule "packages"]
 	path = packages
-	url = ssh://git@github.com:mesalock-linux/packages.git
+	url = ssh://git@github.com/mesalock-linux/packages.git
 	branch = master
