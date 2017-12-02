@@ -1,4 +1,4 @@
-<p align="center"><img src="img/logo.png" height="64" /></p>
+<p align="center"><img src="img/logo.png" height="86" /></p>
 
 # MesaLock Linux: A Memory-Safe Linux Distribution
 
