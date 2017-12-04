@@ -232,10 +232,13 @@ You can get involved in various forms:
     and joining the the MesaLock Linux packages
   - Auditing source code of the MesaLock Linux projects and related packages
 
+You are welcome to send pull requests and report issues on GitHub.
+
 ## Community
 
 If you are interested in the MesaLock Linux project, please find us on the
-`#mesalock-linux` IRC channel at the [freenode server](irc://chat.freenode.net)
+`#mesalock-linux` or `#mesalock-linux-cn` (in Chinese) IRC channels at the [freenode
+server](irc://chat.freenode.net)
 and the bridged room on Matrix. If you're not familiar with IRC, we recommend
 chatting through [Matrix via
 Riot](https://riot.im/app/#/room/#mesalock-linux:matrix.org) or via the [Kiwi
@@ -243,7 +246,7 @@ web IRC client](https://kiwiirc.com/client/irc.mozilla.org/#mesalock-linux).
 
 ## Maintainer
 
-  - Mingshen Sun `<sunmingshen@baidu.com>`
+  - Mingshen Sun `<mssun@mesalock-linux.org>` [@mssun](https://github.com/mssun)
 
 ## License
 
