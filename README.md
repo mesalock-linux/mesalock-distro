@@ -47,10 +47,12 @@ image for a container.
 
 #### Clone MesaLock repository
 
-Clone `mesalock-distro` repositry recursively with its submodules (packages).
+Clone `mesalock-distro` and `pacakges` repositories.
 
 ```sh
-$ git clone --recursive https://github.com/mesalock-linux/mesalock-distro.git
+$ mkdir mesalock-linux && cd mesalock-linux
+$ git clone https://github.com/mesalock-linux/mesalock-distro.git
+$ git clone https://github.com/mesalock-linux/packages.git
 $ cd mesalock-distro
 ```
 
@@ -62,7 +64,7 @@ container environment, you can build packages, live ISO, and rootfs.
 
 ```sh
 $ docker build -t mesalocklinux/build-mesalock-linux --rm build-dockerfile
-$ docker run -v $(pwd):/mesalock-distro -w /mesalock-distro \
+$ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux \
     -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
 
