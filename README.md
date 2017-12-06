@@ -64,7 +64,7 @@ container environment, you can build packages, live ISO, and rootfs.
 
 ```sh
 $ docker build -t mesalocklinux/build-mesalock-linux --rm build-dockerfile
-$ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux \
+$ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux/mesalock-distro \
     -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
 
