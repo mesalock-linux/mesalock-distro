@@ -123,7 +123,7 @@ packages, live ISO, and rootfs.
   - Build the container rootfs: `./mesalockrootfs`
   - Build a specific package only: `./mkpkg <package_name>`
 
-The live ISO (`mesalock-linux.iso`) and rootfs (`rootfs.tar.gz`) can be found
+The live ISO (`mesalock-linux.iso`) and rootfs (`rootfs.tar.xz`) can be found
 in the `build` directory.
 
 ## Trying
@@ -145,7 +145,7 @@ steps to try MesaLock Linux in VirtualBox.
 We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
 MesaLock Linux in a docker container.
 
-  1. Copy rootfs into the docker directory: `cp build/rootfs.tar.gz mesalockrootfs-dockerfile/`
+  1. Copy rootfs into the docker directory: `cp build/rootfs.tar.xz mesalockrootfs-dockerfile/`
   2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux mesalockrootfs-dockerfile`
   3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalocklinux/mesalock-linux`
 
