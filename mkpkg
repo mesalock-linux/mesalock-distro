@@ -12,7 +12,7 @@ export MAKEFLAGS=-j$(nproc)
 
 workdir="$(pwd)"
 buildroot="$workdir/build"
-pkgrepo="$workdir/packages"
+pkgrepo="$(dirname $workdir)/packages"
 
 mkpkg() {
   prepare() { :; }
