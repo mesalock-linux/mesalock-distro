@@ -40,6 +40,11 @@ mkpkg() {
   echo "[+] $1: done"
 }
 
+check_env() {
+  rustup show
+}
+
+check_env
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
   ls "$pkgrepo" | parallel --ungroup "-j$(nproc)" ./mkpkg {}
