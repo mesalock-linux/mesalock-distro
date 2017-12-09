@@ -153,7 +153,9 @@ The latest rootfs image with all pacakges are pushed to [Docker
 Hub](https://hub.docker.com/r/mesalocklinux/mesalock-linux/). You can also
 directly run the image with the repo name `mesalocklinux/mesalock-linux`.
 
-### Example: hosting web servers
+### Demos
+
+#### Hosting web servers
 
 The `mesalock-demo` package provides several examples and will be installed
 under the `/root/mesalock-demo` directory. For instance, we made several web
@@ -183,6 +185,13 @@ follow these instructions.
     ```
   6. Finally, connect to the web server using a browser. In this example, type
      in http://127.0.0.1:8080 in the browser.
+
+#### Working on machine learning tasks
+
+[Rusty-machine](https://github.com/AtheMathmo/rusty-machine) is a general
+purpose machine learning library implemented entirely in Rust. We put several
+demo examples of machine learning tasks in the `mesalock-demo` package. You can
+find them in the `/root/mesalock-demo/rusty-machine/` directory.
 
 ## Packages
 
