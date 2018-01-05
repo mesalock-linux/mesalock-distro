@@ -21,11 +21,15 @@ RUN apt-get update && \
         libmpc-dev \
         libisl-dev \
         libz-dev \
+        python-pip \
+        python-setuptools \
         software-properties-common && \
     add-apt-repository -y ppa:gophers/archive && \
     apt-get update && \
     apt-get install -q -y --no-install-recommends \
         golang-1.9-go
+
+RUN pip install sphinx
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
     rustup default nightly
