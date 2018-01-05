@@ -97,7 +97,12 @@ $ apt-get update && \
            libmpc-dev \
            libisl-dev \
            libz-dev \
+	   python-pip \
+	   python-setuptools \
            software-properties-common
+
+$ # install sphinx
+$ pip install sphinx
 
 $ # install Go
 $ add-apt-repository -y ppa:gophers/archive && \
