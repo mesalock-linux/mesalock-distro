@@ -6,3 +6,16 @@ pipeline:
       - ./mkpkg
       - ./mesalockiso
       - ./mesalockrootfs
+  notify:
+    image: drillster/drone-email
+    secrets:
+      - source: email_host
+        target: plugin_host
+      - source: email_username
+        target: plugin_username
+      - source: email_password
+        target: plugin_password
+    from: ci@mesalock-linux.org
+    recipients: [ devel@mesalock-linux.org ]
+    when:
+      status: [ success, changed, failure ]
