@@ -2,6 +2,10 @@
 
 # MesaLock Linux: A Memory-Safe Linux Distribution
 
+[![Build Status](https://ci.mesalock-linux.org/api/badges/mesalock-linux/mesalock-distro/status.svg?branch=master)](https://ci.mesalock-linux.org/mesalock-linux/mesalock-distro)
+[![Chat on Matrix](https://img.shields.io/badge/style-matrix-blue.svg?style=flat&label=chat)](https://riot.im/app/#/room/#mesalock-linux:matrix.org)
+[![IRC: #rocket on chat.freenode.net](https://img.shields.io/badge/style-%23mesalock--linux-blue.svg?style=flat&label=freenode)](https://kiwiirc.com/client/chat.freenode.net/#mesalock-linux)
+
 MesaLock Linux is a general purpose Linux distribution which aims to provide a
 *safe* and *secure* user space environment. To eliminate high-severe
 vulnerabilities caused by memory corruption, the whole user space applications
