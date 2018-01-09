@@ -47,7 +47,7 @@ check_env() {
 check_env
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
-  ls "$pkgrepo" | parallel --ungroup "-j$(nproc)" ./mkpkg {}
+  ls -d "$pkgrepo"/*/ | xargs -n1 basename | parallel --ungroup "-j$(nproc)" ./mkpkg {}
 else
   for pkg in "$@"; do
       mkpkg "$pkg"
