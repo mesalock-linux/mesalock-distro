@@ -1,0 +1,8 @@
+pipeline:
+  build:
+    image: mesalocklinux/build-mesalock-linux
+    commands:
+      - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
+      - ./mkpkg
+      - ./mesalockiso
+      - ./mesalockrootfs
