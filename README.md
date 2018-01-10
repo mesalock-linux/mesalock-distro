@@ -25,11 +25,12 @@ Linux follows the following rules-of-thumb for hybrid memory-safe architecture
 designing proposed by the [Rust SGX SDK](https://github.com/baidu/rust-sgx-sdk)
 project.
 
-1. Unsafe components should be appropriately isolated and modularized, and the
-   size should be small (or minimized).
-2. Unsafe components should not weaken the safe, especially, public APIs and
-   data structures.
-3. Unsafe components should be clearly identified and easily upgraded.
+1. Unsafe components must not taint safe components, especially for public APIs
+   and data structures.
+2. Unsafe components should be as small as possible and decoupled from safe
+   components.
+3. Unsafe components should be explicitly marked during deployment and ready to
+   upgrade.
 
 
 ## Quick Start
