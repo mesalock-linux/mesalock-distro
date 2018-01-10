@@ -254,7 +254,10 @@ You can get involved in various forms:
     and joining the the MesaLock Linux packages
   - Auditing source code of the MesaLock Linux projects and related packages
 
-You are welcome to send pull requests and report issues on GitHub.
+You are welcome to send pull requests and report issues on GitHub. Note that
+the MesaLock Linux project follows the [Git
+flow](http://nvie.com/posts/a-successful-git-branching-model/) development
+model.
 
 ## Community
 
@@ -265,6 +268,11 @@ and the bridged room on Matrix. If you're not familiar with IRC, we recommend
 chatting through [Matrix via
 Riot](https://riot.im/app/#/room/#mesalock-linux:matrix.org) or via the [Kiwi
 web IRC client](https://kiwiirc.com/client/irc.mozilla.org/#mesalock-linux).
+
+List of our IRC channels:
+  - [#mesalock-linux](https://riot.im/app/#/room/#mesalock-linux:matrix.org): general discussion on MesaLock Linux
+  - [#mesalock-linux-cn](https://riot.im/app/#/room/#mesalock-linux-cn:matrix.org): discussion in Chinese
+  - [#medalock-linux-devel](https://riot.im/app/#/room/#mesalock-linux-devel:matrix.org): discussion on design and development
 
 ## Maintainer
 
