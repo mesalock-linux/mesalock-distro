@@ -1,21 +1,22 @@
 pipeline:
-  build:
-    image: mesalocklinux/build-mesalock-linux
+  prepare:
+    image: plugins/git
     commands:
       - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
+  build-mkpkg:
+    image: mesalocklinux/build-mesalock-linux
+    commands:
       - ./mkpkg
+  build-mesalockiso:
+    image: mesalocklinux/build-mesalock-linux
+    commands:
       - ./mesalockiso
+  build-mesalockrootfs:
+    image: mesalocklinux/build-mesalock-linux
+    commands:
       - ./mesalockrootfs
   notify:
     image: drillster/drone-email
-    secrets:
-      - source: email_host
-        target: plugin_host
-      - source: email_username
-        target: plugin_username
-      - source: email_password
-        target: plugin_password
-    from: ci@mesalock-linux.org
-    recipients: [ devel@mesalock-linux.org ]
+    secrets: [ plugin_host, plugin_username, plugin_password, plugin_from ]
     when:
       status: [ success, changed, failure ]
