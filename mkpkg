@@ -12,14 +12,16 @@ export MAKEFLAGS=-j$(nproc)
 
 workdir="$(pwd)"
 buildroot="$workdir/build"
-pkgrepo="$(dirname $workdir)/packages"
+pkgrepobase="$(dirname $workdir)/packages"
 
 mkpkg() {
+  category="$(dirname $1)"
+  pkgrepo="$pkgrepobase/$category"
   prepare() { :; }
   build() { :; }
   package() { :; }
 
-  . "$pkgrepo/$1/BUILD"
+  . "$pkgrepobase/$1/BUILD"
   
   srcdir="$buildroot/src/$pkgname"
   builddir="$buildroot/bld/$pkgname"
@@ -47,7 +49,9 @@ check_env() {
 check_env
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
-  ls -d "$pkgrepo"/*/ | xargs -n1 basename | parallel --ungroup "-j$(nproc)" ./mkpkg {}
+  for category in core community core-testing community-testing; do
+    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" ./mkpkg $category/{}
+  done
 else
   for pkg in "$@"; do
       mkpkg "$pkg"
