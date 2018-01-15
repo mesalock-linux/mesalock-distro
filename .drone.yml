@@ -3,18 +3,29 @@ pipeline:
     image: plugins/git
     commands:
       - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
-  build-mkpkg:
+  build-packages:
     image: mesalocklinux/build-mesalock-linux
     commands:
       - ./mkpkg
-  build-mesalockiso:
+  build-iso:
     image: mesalocklinux/build-mesalock-linux
     commands:
       - ./mesalockiso
-  build-mesalockrootfs:
+  build-rootfs:
     image: mesalocklinux/build-mesalock-linux
     commands:
       - ./mesalockrootfs
+      - cp build/rootfs.tar.xz mesalockrootfs-dockerfile/
+  build-docker-image:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    dockerfile: mesalockrootfs-dockerfile/Dockerfile
+    context: mesalockrootfs-dockerfile
+    secrets: [ docker_username, docker_password ]
+    tags: [ develop ]
+    when:
+      branch: develop
+      event: push
   notify:
     image: drillster/drone-email
     secrets: [ plugin_host, plugin_username, plugin_password, plugin_from ]
