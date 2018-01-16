@@ -69,7 +69,7 @@ installed. You can build the docker image first and then in the building
 container environment, you can build packages, live ISO, and rootfs.
 
 ```sh
-$ docker build -t mesalocklinux/build-mesalock-linux --rm build-dockerfile
+$ docker build --rm -t mesalocklinux/build-mesalock-linux -f Dockerfile.build .
 $ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux/mesalock-distro \
     -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
@@ -156,8 +156,8 @@ steps to try MesaLock Linux in VirtualBox.
 We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
 MesaLock Linux in a docker container.
 
-  1. Copy rootfs into the docker directory: `cp build/rootfs.tar.xz mesalockrootfs-dockerfile/`
-  2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux mesalockrootfs-dockerfile`
+  1. Build packages and rootfs: `./mkpkg && ./mesalockrootfs`
+  2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux .`
   3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalocklinux/mesalock-linux`
 
 The latest rootfs image with all pacakges are pushed to [Docker

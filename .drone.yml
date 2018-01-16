@@ -15,12 +15,10 @@ pipeline:
     image: mesalocklinux/build-mesalock-linux
     commands:
       - ./mesalockrootfs
-      - cp build/rootfs.tar.xz mesalockrootfs-dockerfile/
   build-docker-image:
     image: plugins/docker
     repo: mesalocklinux/mesalock-linux
-    dockerfile: mesalockrootfs-dockerfile/Dockerfile
-    context: mesalockrootfs-dockerfile
+    dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
     tags: [ develop ]
     when:
