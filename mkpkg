@@ -14,6 +14,8 @@ workdir="$(pwd)"
 buildroot="$workdir/build"
 pkgrepobase="$(dirname $workdir)/packages"
 
+VERBOSE=false
+
 mkpkg() {
   category="$(dirname $1)"
   pkgrepo="$pkgrepobase/$category"
@@ -34,7 +36,11 @@ mkpkg() {
   echo "[+] $1: start"
   for f in prepare build package; do
     echo "[+] $1: $f"
-    cd "$buildroot" && "$f"
+    if [ "$2" == true ]; then
+      cd "$buildroot" && "$f"
+    else
+      cd "$buildroot" && "$f" > /dev/null 2>&1
+    fi
   done
   
   echo "[+] $1: tar and zip"
@@ -46,14 +52,26 @@ check_env() {
   rustup show
 }
 
-check_env
+while true; do
+  case "$1" in
+    -v | --verbose ) VERBOSE=true; shift ;;
+    * ) break ;;
+  esac
+done
+
+if [ "$VERBOSE" == true ]; then
+    flag="-v"
+fi
+
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
+  check_env
   for category in core community core-testing community-testing; do
-    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" ./mkpkg $category/{}
+    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" ./mkpkg $flag $category/{}
   done
 else
+  check_env
   for pkg in "$@"; do
-      mkpkg "$pkg"
+      mkpkg "$pkg" "$VERBOSE"
   done
 fi
