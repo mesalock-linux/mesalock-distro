@@ -15,14 +15,21 @@ pipeline:
     image: mesalocklinux/build-mesalock-linux
     commands:
       - ./mesalockrootfs
-  build-docker-image:
+  publish-docker-image-develop:
     image: plugins/docker
     repo: mesalocklinux/mesalock-linux
-    dockerfile: Dockerfile
     secrets: [ docker_username, docker_password ]
     tags: [ develop ]
     when:
       branch: develop
+      event: push
+  publish-docker-image-latest:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    secrets: [ docker_username, docker_password ]
+    tags: [ latest ]
+    when:
+      branch: master
       event: push
   notify:
     image: drillster/drone-email
