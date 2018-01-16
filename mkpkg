@@ -68,7 +68,8 @@ if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
   check_env
   for category in core community core-testing community-testing; do
-    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" ./mkpkg $flag $category/{}
+    export workdir buildroot pkgrepobase && export -f mkpkg
+    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" mkpkg "$category/{}" "$VERBOSE"
   done
 else
   check_env
