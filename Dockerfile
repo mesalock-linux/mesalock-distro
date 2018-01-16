@@ -1,5 +1,5 @@
 FROM scratch
-MAINTAINER Mingshen Sun <sunmingshen@baidu.com>
+MAINTAINER Mingshen Sun <mssun@mesalock-linux.org>
 
 ADD build/rootfs.tar.xz /
 
