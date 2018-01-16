@@ -7,6 +7,7 @@
 # For a copy, see the LICENSE file.
 
 set -e
+trap 'echo "[-] ERROR: $BASH_SOURCE:$LINENO $BASH_COMMAND" >&2' ERR
 
 export MAKEFLAGS=-j$(nproc)
 
