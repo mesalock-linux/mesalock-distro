@@ -29,6 +29,7 @@ RUN apt-get update && \
     apt-get install -q -y --no-install-recommends \
         golang-1.9-go
 
+RUN pip install wheel
 RUN pip install sphinx
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
