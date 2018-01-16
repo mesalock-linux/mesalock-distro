@@ -180,22 +180,34 @@ follow these instructions.
      guest IP (10.0.2.15:8000).
   2. Start MesaLock Linux.
   3. Bring up all network devices. Here we use `ip` command:
+
     ```
     $ ip link set lo up
     $ ip link set eth0 up
     ```
+
   4. Setup IP address of the network devices.
+
     ```
     $ ip address add 10.0.2.15/24 dev eth0
     ```
+
   5. Run a web server.
+
     ```
     $ cd /root/mesalock-demo/rocket-hello-world && ./hello_world
     $ # or
     $ cd /root/mesalock-demo/rocket-tls && ./tls
     ```
+
   6. Finally, connect to the web server using a browser. In this example, type
      in http://127.0.0.1:8080 in the browser.
+
+You can also try our demos in the docker image directly.
+
+  1. Run the MesaLock docker and export port 8000 to 8000: `docker run -it -p 8000:8000 mesalocklinux/mesalock-linux`
+  2. Run a web server in the `/root/mesalock-demo/` directory.
+  3. Visit the website in the browser.
 
 #### Working on machine learning tasks
 
