@@ -108,6 +108,7 @@ $ apt-get update && \
            software-properties-common
 
 $ # install sphinx
+$ pip install wheel
 $ pip install sphinx
 
 $ # install Go
@@ -118,7 +119,7 @@ $ add-apt-repository -y ppa:gophers/archive && \
 
 $ # install Rust
 $ curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup default nightly
+    rustup override set nightly-2018-01-14
 
 $ # setup PATH
 $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"

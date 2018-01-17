@@ -41,17 +41,13 @@ mkpkg() {
     if [ "$2" == true ]; then
       cd "$buildroot" && "$f"
     else
-      cd "$buildroot" && "$f" > /dev/null 2>&1
+      cd "$buildroot" && "$f" > /dev/null
     fi
   done
   
   echo "[+] $1: tar and zip"
   tar cfJ "$outdir/$pkgname.tar.xz" -C "$pkgdir" .
   echo "[+] $1: done"
-}
-
-check_env() {
-  rustup show
 }
 
 while true; do
@@ -67,13 +63,11 @@ fi
 
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
-  check_env
+  export workdir buildroot pkgrepobase && export -f mkpkg
   for category in core community core-testing community-testing; do
-    export workdir buildroot pkgrepobase && export -f mkpkg
-    ls "$pkgrepobase/$category" | parallel --ungroup "-j$(nproc)" mkpkg "$category/{}" "$VERBOSE"
+    ls "$pkgrepobase/$category" | parallel --ungroup mkpkg "$category/{}" "$VERBOSE"
   done
 else
-  check_env
   for pkg in "$@"; do
       mkpkg "$pkg" "$VERBOSE"
   done
