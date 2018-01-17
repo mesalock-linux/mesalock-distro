@@ -31,6 +31,13 @@ pipeline:
     when:
       branch: master
       event: push
+  publish-docker-image-tag:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    secrets: [ docker_username, docker_password ]
+    default_tags: true
+    when:
+      event: tag
   notify:
     image: drillster/drone-email
     secrets: [ plugin_host, plugin_username, plugin_password, plugin_from ]
