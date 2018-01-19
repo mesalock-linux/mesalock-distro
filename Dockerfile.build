@@ -29,6 +29,26 @@ RUN apt-get update && \
     apt-get install -q -y --no-install-recommends \
         golang-1.9-go
 
+# Dependencies of building pypy
+RUN apt-get install -q -y --no-install-recommends \
+        pypy \
+        gcc \
+        make \
+        libffi-dev \
+        pkg-config \
+        zlib1g-dev \
+        libbz2-dev \
+        libsqlite3-dev \
+        libncurses5-dev \
+        libexpat1-dev \
+        libssl-dev \
+        libgdbm-dev \
+        tk-dev \
+        libgc-dev \
+        python-cffi \
+        liblzma-dev \
+        libncursesw5-dev
+
 RUN pip install wheel
 RUN pip install sphinx
 
