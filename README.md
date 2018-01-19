@@ -107,7 +107,27 @@ $ apt-get update && \
 	   python-setuptools \
            software-properties-common
 
-$ # install sphinx
+$ # install dependencies of building pypy
+$ apt-get install -q -y --no-install-recommends \
+        pypy \
+        gcc \
+        make \
+        libffi-dev \
+        pkg-config \
+        zlib1g-dev \
+        libbz2-dev \
+        libsqlite3-dev \
+        libncurses5-dev \
+        libexpat1-dev \
+        libssl-dev \
+        libgdbm-dev \
+        tk-dev \
+        libgc-dev \
+        python-cffi \
+        liblzma-dev \
+        libncursesw5-dev
+
+$ # install wheel and sphinx
 $ pip install wheel
 $ pip install sphinx
 
