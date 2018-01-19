@@ -26,6 +26,7 @@ packages=(filesystem \
           tokei \
           brotli \
           micro \
+          pypy \
           mesalock-demo)
 
 rm -rf "$rootfsdir"
