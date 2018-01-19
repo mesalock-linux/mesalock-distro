@@ -29,11 +29,12 @@ mkpkg() {
   
   srcdir="$buildroot/src/$pkgname"
   builddir="$buildroot/bld/$pkgname"
+  logdir="$buildroot/log/$pkgname"
   pkgdir="$buildroot/pkg/$pkgname"
   outdir="$buildroot/out"
   
-  rm -rf "$srcdir" "$builddir" "$pkgdir"
-  mkdir -p "$srcdir" "$builddir" "$pkgdir" "$outdir"
+  rm -rf "$srcdir" "$builddir" "$pkgdir" "$logdir"
+  mkdir -p "$srcdir" "$builddir" "$pkgdir" "$logdir" "$outdir"
   
   echo "[+] $1: start"
   for f in prepare build package; do
@@ -41,7 +42,7 @@ mkpkg() {
     if [ "$2" == true ]; then
       cd "$buildroot" && "$f"
     else
-      cd "$buildroot" && "$f" > /dev/null
+      cd "$buildroot" && "$f" > "$logdir"/stdout.log 2> "$logdir"/stderr.log
     fi
   done
   
