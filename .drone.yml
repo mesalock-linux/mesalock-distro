@@ -5,14 +5,17 @@ pipeline:
       - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
   build-packages:
     image: mesalocklinux/build-mesalock-linux
+    pull: true
     commands:
       - ./mkpkg
   build-iso:
     image: mesalocklinux/build-mesalock-linux
+    pull: true
     commands:
       - ./mesalockiso
   build-rootfs:
     image: mesalocklinux/build-mesalock-linux
+    pull: true
     commands:
       - ./mesalockrootfs
   publish-docker-image-develop:
