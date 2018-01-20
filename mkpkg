@@ -65,9 +65,13 @@ fi
 if [[ "$#" -eq 0 ]] ; then
   echo '[+] mkpkg: build all packages'
   export workdir buildroot pkgrepobase && export -f mkpkg
-  for category in core community core-testing community-testing; do
-    ls "$pkgrepobase/$category" | parallel --ungroup mkpkg "$category/{}" "$VERBOSE"
-  done
+  {
+    cd "$pkgrepobase"
+    for category in core community core-testing community-testing; do
+      ls "$category" | xargs -i echo "$category/{}"
+    done
+    cd ..
+  } | parallel --ungroup mkpkg "{}" "$VERBOSE"
 else
   for pkg in "$@"; do
       mkpkg "$pkg" "$VERBOSE"
