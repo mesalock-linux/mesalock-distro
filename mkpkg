@@ -42,7 +42,7 @@ mkpkg() {
     if [ "$2" == true ]; then
       cd "$buildroot" && "$f"
     else
-      cd "$buildroot" && "$f" > "$logdir"/stdout.log 2> "$logdir"/stderr.log
+      cd "$buildroot" && "$f" > "$logdir"/"$f".stdout.log 2> "$logdir"/"$f".stderr.log
     fi
   done
   
