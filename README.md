@@ -91,6 +91,7 @@ $ apt-get update && \
            curl \
            git \
            build-essential \
+           cmake \
            wget \
            bc \
            gawk \
