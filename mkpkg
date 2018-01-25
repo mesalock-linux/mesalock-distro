@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -e
 
 # Copyright (c) 2017, The MesaLock Linux Project Contributors
 # All rights reserved.
@@ -6,7 +6,6 @@
 # This work is licensed under the terms of the BSD 3-Clause License.
 # For a copy, see the LICENSE file.
 
-set -eE
 trap 'echo "[-] ERROR: $BASH_SOURCE:$LINENO $BASH_COMMAND" >&2' ERR
 
 export MAKEFLAGS=-j$(nproc)
@@ -18,11 +17,12 @@ pkgrepobase="$(dirname $workdir)/packages"
 VERBOSE=false
 
 mkpkg() {
-  set -e
+  set +e
   category="$(dirname $1)"
   pkgrepo="$pkgrepobase/$category"
   prepare() { :; }
   build() { :; }
+  check() { :; }
   package() { :; }
 
   . "$pkgrepobase/$1/BUILD"
@@ -33,16 +33,23 @@ mkpkg() {
   pkgdir="$buildroot/pkg/$pkgname"
   outdir="$buildroot/out"
   
-  rm -rf "$srcdir" "$builddir" "$pkgdir" "$logdir"
-  mkdir -p "$srcdir" "$builddir" "$pkgdir" "$logdir" "$outdir"
+  for d in "$srcdir" "$builddir" "$pkgdir" "$logdir"; do
+    rm -rf "$d" && mkdir -p "$d"
+  done
+  mkdir -p "$outdir"
   
   echo "[+] $1: start"
-  for f in prepare build package; do
+  for f in prepare build check package; do
     echo "[+] $1: $f"
+    cd "$buildroot"
     if [ "$2" == true ]; then
-      cd "$buildroot" && "$f"
+      "$f"
     else
-      cd "$buildroot" && "$f" > "$logdir"/"$f".stdout.log 2> "$logdir"/"$f".stderr.log
+      "$f" > "$logdir/$f".log
+    fi
+    if [[ $? != 0 ]]; then
+       echo "[-] $1: ERROR - $f"
+       exit 1
     fi
   done
   
