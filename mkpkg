@@ -6,6 +6,8 @@
 # This work is licensed under the terms of the BSD 3-Clause License.
 # For a copy, see the LICENSE file.
 
+set -o pipefail
+
 trap 'echo "[-] ERROR: $BASH_SOURCE:$LINENO $BASH_COMMAND" >&2' ERR
 
 export MAKEFLAGS=-j$(nproc)
@@ -32,30 +34,41 @@ mkpkg() {
   logdir="$buildroot/log/$pkgname"
   pkgdir="$buildroot/pkg/$pkgname"
   outdir="$buildroot/out"
-  
+
   for d in "$srcdir" "$builddir" "$pkgdir" "$logdir"; do
     rm -rf "$d" && mkdir -p "$d"
   done
   mkdir -p "$outdir"
   
+  exit_status=0
   echo "[+] $1: start"
   for f in prepare build check package; do
     echo "[+] $1: $f"
+    stdoutlog="$logdir/$f.stdout.log"
+    stderrlog="$logdir/$f.stderr.log"
     cd "$buildroot"
     if [ "$2" == true ]; then
       "$f"
     else
-      "$f" > "$logdir/$f".log
+      "$f" > $stdoutlog 2> $stderrlog
     fi
-    if [[ $? != 0 ]]; then
-       echo "[-] $1: ERROR - $f"
-       exit 1
+    status=$?
+    (( exit_status = exit_status || $status ))
+    if [[ $status != 0 ]]; then
+      echo "[-] $1: $f error"
+      break
     fi
   done
   
-  echo "[+] $1: tar and zip"
-  tar cfJ "$outdir/$pkgname.tar.xz" -C "$pkgdir" .
-  echo "[+] $1: done"
+  if [[ $exit_status == 0 ]]; then
+    echo "[+] $1: tar and zip"
+    tar cfJ "$outdir/$pkgname.tar.xz" -C "$pkgdir" .
+    echo "[+] $1: done"
+  else
+    echo "[-] $1: failed"
+    return 1
+  fi
+  return 0
 }
 
 while true; do
@@ -66,7 +79,7 @@ while true; do
 done
 
 if [ "$VERBOSE" == true ]; then
-    flag="-v"
+  flag="-v"
 fi
 
 if [[ "$#" -eq 0 ]] ; then
@@ -81,6 +94,6 @@ if [[ "$#" -eq 0 ]] ; then
   } | parallel --ungroup mkpkg "{}" "$VERBOSE"
 else
   for pkg in "$@"; do
-      mkpkg "$pkg" "$VERBOSE"
+    mkpkg "$pkg" "$VERBOSE"
   done
 fi
