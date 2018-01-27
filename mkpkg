@@ -43,7 +43,7 @@ mkpkg() {
   exit_status=0
   echo "[+] $1: start"
   for f in prepare build check package; do
-    echo "[+] $1: $f"
+    echo "[+] $1: $f..."
     stdoutlog="$logdir/$f.stdout.log"
     stderrlog="$logdir/$f.stderr.log"
     cd "$buildroot"
@@ -57,6 +57,8 @@ mkpkg() {
     if [[ $status != 0 ]]; then
       echo "[-] $1: $f error"
       break
+    else
+      echo "[+] $1: $f success"
     fi
   done
   
