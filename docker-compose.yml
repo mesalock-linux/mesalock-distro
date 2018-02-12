@@ -1,0 +1,9 @@
+version: '2.2'
+
+services:
+  build-mesalock-linux:
+    image: mesalocklinux/build-mesalock-linux:${MESALOCK_VERSION:-latest}
+    working_dir: /mesalock-linux/mesalock-distro
+    tty: true
+    volumes:
+      - ../:/mesalock-linux
