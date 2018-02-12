@@ -199,8 +199,8 @@ follow these instructions.
 
   1. In the VM settings, select "NAT" for network adapter and use port
      forwarding function in the advanced settings to bind host and guest
-     machines. Here we add a new rule to bind host IP (127.0.0.1:8080) with
-     guest IP (10.0.2.15:8000).
+     machines. Here we add a new rule to bind host IP (`127.0.0.1:8080`) with
+     guest IP (`10.0.2.15:8000`).
   2. Start MesaLock Linux.
   3. Bring up all network devices. Here we use `ip` command:
 
@@ -224,7 +224,7 @@ follow these instructions.
     ```
 
   6. Finally, connect to the web server using a browser. In this example, type
-     in http://127.0.0.1:8080 in the browser.
+     in `http://127.0.0.1:8080` in the browser.
 
 You can also try our demos in the docker image directly.
 
@@ -251,7 +251,7 @@ packages will increase as the time goes on.
   - `exa`: replacement for ls written in Rust ([ogham/exa](https://the.exa.website))
   - `fd-find`: simple, fast and user-friendly alternative to find ([sharkdp/fd](https://github.com/sharkdp/fd))
   - `filesystem`: base filesystem layout (maintained by MesaLock Linux)
-  - `gcc-libs`: GCC library, only libgcc_s.so is used ([gcc](https://gcc.gnu.org/))
+  - `gcc-libs`: GCC library, only `libgcc_s.so` is used ([gcc](https://gcc.gnu.org/))
   - `giproute2`: ip tool written in Go (maintained by MesaLock Linux)
   - `glibc`: the GNU C library ([glibc](https://www.gnu.org/software/libc/))
   - `init`: init script (maintained by MesaLock Linux)
@@ -270,6 +270,7 @@ packages will increase as the time goes on.
   - `uutils-findutils`: rust implementation of findutils ([uutils/findutils](https://github.com/uutils/findutils))
   - `xi-core`: a modern editor with a backend written in Rust ([google/xi-editor](https://github.com/google/xi-editor))
   - `xi-tui`: a tui frontend for Xi ([little-dude/xi-tui](https://github.com/little-dude/xi-tui))
+  - more packages in the [MesaLock Linux Package](https://github.com/mesalock-linux/packages) project
 
 ## Contributing
 
