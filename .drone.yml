@@ -1,0 +1,48 @@
+pipeline:
+  prepare:
+    image: plugins/git
+    commands:
+      - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
+  build-packages:
+    image: mesalocklinux/build-mesalock-linux
+    pull: true
+    commands:
+      - ./mkpkg
+  build-iso:
+    image: mesalocklinux/build-mesalock-linux
+    pull: true
+    commands:
+      - ./mesalockiso
+  build-rootfs:
+    image: mesalocklinux/build-mesalock-linux
+    pull: true
+    commands:
+      - ./mesalockrootfs
+  publish-docker-image-develop:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    secrets: [ docker_username, docker_password ]
+    tags: [ develop ]
+    when:
+      branch: develop
+      event: push
+  publish-docker-image-latest:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    secrets: [ docker_username, docker_password ]
+    tags: [ latest ]
+    when:
+      branch: master
+      event: push
+  publish-docker-image-tag:
+    image: plugins/docker
+    repo: mesalocklinux/mesalock-linux
+    secrets: [ docker_username, docker_password ]
+    default_tags: true
+    when:
+      event: tag
+  notify:
+    image: drillster/drone-email
+    secrets: [ plugin_host, plugin_username, plugin_password, plugin_from ]
+    when:
+      status: [ success, changed, failure ]

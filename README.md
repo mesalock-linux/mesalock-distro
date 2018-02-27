@@ -2,6 +2,12 @@
 
 # MesaLock Linux: A Memory-Safe Linux Distribution
 
+[![GitHub Release](https://img.shields.io/github/release/mesalock-linux/mesalock-distro.svg)](https://github.com/mesalock-linux/mesalock-distro/releases)
+[![Build Status](https://ci.mesalock-linux.org/api/badges/mesalock-linux/mesalock-distro/status.svg?branch=master)](https://ci.mesalock-linux.org/mesalock-linux/mesalock-distro)
+[![Docker Pulls](https://img.shields.io/docker/pulls/mesalocklinux/mesalock-linux.svg)](https://hub.docker.com/r/mesalocklinux/mesalock-linux/)
+[![Chat on Matrix](https://img.shields.io/badge/style-matrix-blue.svg?style=flat&label=chat)](https://riot.im/app/#/room/#mesalock-linux:matrix.org)
+[![IRC: #rocket on chat.freenode.net](https://img.shields.io/badge/style-%23mesalock--linux-blue.svg?style=flat&label=freenode)](https://kiwiirc.com/client/chat.freenode.net/#mesalock-linux)
+
 MesaLock Linux is a general purpose Linux distribution which aims to provide a
 *safe* and *secure* user space environment. To eliminate high-severe
 vulnerabilities caused by memory corruption, the whole user space applications
@@ -20,11 +26,12 @@ Linux follows the following rules-of-thumb for hybrid memory-safe architecture
 designing proposed by the [Rust SGX SDK](https://github.com/baidu/rust-sgx-sdk)
 project.
 
-1. Unsafe components should be appropriately isolated and modularized, and the
-   size should be small (or minimized).
-2. Unsafe components should not weaken the safe, especially, public APIs and
-   data structures.
-3. Unsafe components should be clearly identified and easily upgraded.
+1. Unsafe components must not taint safe components, especially for public APIs
+   and data structures.
+2. Unsafe components should be as small as possible and decoupled from safe
+   components.
+3. Unsafe components should be explicitly marked during deployment and ready to
+   upgrade.
 
 
 ## Quick Start
@@ -63,7 +70,7 @@ installed. You can build the docker image first and then in the building
 container environment, you can build packages, live ISO, and rootfs.
 
 ```sh
-$ docker build -t mesalocklinux/build-mesalock-linux --rm build-dockerfile
+$ docker build --rm -t mesalocklinux/build-mesalock-linux -f Dockerfile.build .
 $ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux/mesalock-distro \
     -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
@@ -84,6 +91,7 @@ $ apt-get update && \
            curl \
            git \
            build-essential \
+           cmake \
            wget \
            bc \
            gawk \
@@ -97,7 +105,33 @@ $ apt-get update && \
            libmpc-dev \
            libisl-dev \
            libz-dev \
+	   python-pip \
+	   python-setuptools \
            software-properties-common
+
+$ # install dependencies of building pypy
+$ apt-get install -q -y --no-install-recommends \
+        pypy \
+        gcc \
+        make \
+        libffi-dev \
+        pkg-config \
+        zlib1g-dev \
+        libbz2-dev \
+        libsqlite3-dev \
+        libncurses5-dev \
+        libexpat1-dev \
+        libssl-dev \
+        libgdbm-dev \
+        tk-dev \
+        libgc-dev \
+        python-cffi \
+        liblzma-dev \
+        libncursesw5-dev
+
+$ # install wheel and sphinx
+$ pip install wheel
+$ pip install sphinx
 
 $ # install Go
 $ add-apt-repository -y ppa:gophers/archive && \
@@ -107,7 +141,7 @@ $ add-apt-repository -y ppa:gophers/archive && \
 
 $ # install Rust
 $ curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup default nightly
+    rustup override set nightly-2018-01-14
 
 $ # setup PATH
 $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
@@ -145,15 +179,17 @@ steps to try MesaLock Linux in VirtualBox.
 We provide a simple `Dockerfile` for MesaLock Linux. Here are steps to try
 MesaLock Linux in a docker container.
 
-  1. Copy rootfs into the docker directory: `cp build/rootfs.tar.xz mesalockrootfs-dockerfile/`
-  2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux mesalockrootfs-dockerfile`
+  1. Build packages and rootfs: `./mkpkg && ./mesalockrootfs`
+  2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux .`
   3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalocklinux/mesalock-linux`
 
 The latest rootfs image with all pacakges are pushed to [Docker
 Hub](https://hub.docker.com/r/mesalocklinux/mesalock-linux/). You can also
 directly run the image with the repo name `mesalocklinux/mesalock-linux`.
 
-### Example: hosting web servers
+### Demos
+
+#### Hosting web servers
 
 The `mesalock-demo` package provides several examples and will be installed
 under the `/root/mesalock-demo` directory. For instance, we made several web
@@ -163,26 +199,45 @@ follow these instructions.
 
   1. In the VM settings, select "NAT" for network adapter and use port
      forwarding function in the advanced settings to bind host and guest
-     machines. Here we add a new rule to bind host IP (127.0.0.1:8080) with
-     guest IP (10.0.2.15:8000).
+     machines. Here we add a new rule to bind host IP (`127.0.0.1:8080`) with
+     guest IP (`10.0.2.15:8000`).
   2. Start MesaLock Linux.
   3. Bring up all network devices. Here we use `ip` command:
+
     ```
     $ ip link set lo up
     $ ip link set eth0 up
     ```
+
   4. Setup IP address of the network devices.
+
     ```
     $ ip address add 10.0.2.15/24 dev eth0
     ```
+
   5. Run a web server.
+
     ```
     $ cd /root/mesalock-demo/rocket-hello-world && ./hello_world
     $ # or
     $ cd /root/mesalock-demo/rocket-tls && ./tls
     ```
+
   6. Finally, connect to the web server using a browser. In this example, type
-     in http://127.0.0.1:8080 in the browser.
+     in `http://127.0.0.1:8080` in the browser.
+
+You can also try our demos in the docker image directly.
+
+  1. Run the MesaLock docker and export port 8000 to 8000: `docker run -it -p 8000:8000 mesalocklinux/mesalock-linux`
+  2. Run a web server in the `/root/mesalock-demo/` directory.
+  3. Visit the website in the browser.
+
+#### Working on machine learning tasks
+
+[Rusty-machine](https://github.com/AtheMathmo/rusty-machine) is a general
+purpose machine learning library implemented entirely in Rust. We put several
+demo examples of machine learning tasks in the `mesalock-demo` package. You can
+find them in the `/root/mesalock-demo/rusty-machine/` directory.
 
 ## Packages
 
@@ -196,7 +251,7 @@ packages will increase as the time goes on.
   - `exa`: replacement for ls written in Rust ([ogham/exa](https://the.exa.website))
   - `fd-find`: simple, fast and user-friendly alternative to find ([sharkdp/fd](https://github.com/sharkdp/fd))
   - `filesystem`: base filesystem layout (maintained by MesaLock Linux)
-  - `gcc-libs`: GCC library, only libgcc_s.so is used ([gcc](https://gcc.gnu.org/))
+  - `gcc-libs`: GCC library, only `libgcc_s.so` is used ([gcc](https://gcc.gnu.org/))
   - `giproute2`: ip tool written in Go (maintained by MesaLock Linux)
   - `glibc`: the GNU C library ([glibc](https://www.gnu.org/software/libc/))
   - `init`: init script (maintained by MesaLock Linux)
@@ -215,6 +270,7 @@ packages will increase as the time goes on.
   - `uutils-findutils`: rust implementation of findutils ([uutils/findutils](https://github.com/uutils/findutils))
   - `xi-core`: a modern editor with a backend written in Rust ([google/xi-editor](https://github.com/google/xi-editor))
   - `xi-tui`: a tui frontend for Xi ([little-dude/xi-tui](https://github.com/little-dude/xi-tui))
+  - more packages in the [MesaLock Linux Package](https://github.com/mesalock-linux/packages) project
 
 ## Contributing
 
@@ -234,7 +290,10 @@ You can get involved in various forms:
     and joining the the MesaLock Linux packages
   - Auditing source code of the MesaLock Linux projects and related packages
 
-You are welcome to send pull requests and report issues on GitHub.
+You are welcome to send pull requests and report issues on GitHub. Note that
+the MesaLock Linux project follows the [Git
+flow](http://nvie.com/posts/a-successful-git-branching-model/) development
+model.
 
 ## Community
 
@@ -245,6 +304,11 @@ and the bridged room on Matrix. If you're not familiar with IRC, we recommend
 chatting through [Matrix via
 Riot](https://riot.im/app/#/room/#mesalock-linux:matrix.org) or via the [Kiwi
 web IRC client](https://kiwiirc.com/client/irc.mozilla.org/#mesalock-linux).
+
+List of our IRC channels:
+  - [#mesalock-linux](https://riot.im/app/#/room/#mesalock-linux:matrix.org): general discussion on MesaLock Linux
+  - [#mesalock-linux-cn](https://riot.im/app/#/room/#mesalock-linux-cn:matrix.org): discussion in Chinese
+  - [#medalock-linux-devel](https://riot.im/app/#/room/#mesalock-linux-devel:matrix.org): discussion on design and development
 
 ## Maintainer
 
