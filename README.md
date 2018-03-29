@@ -314,6 +314,11 @@ List of our IRC channels:
 
   - Mingshen Sun `<mssun@mesalock-linux.org>` [@mssun](https://github.com/mssun)
 
+## Steering Committee
+
+  - Tao Wei
+  - Yulong Zhang
+
 ## License
 
 MesaLock Linux is provided under the [BSD license](LICENSE).
