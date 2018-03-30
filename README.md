@@ -269,7 +269,7 @@ packages will increase as the time goes on.
   - `uutils-coreutils`: cross-platform Rust rewrite of the GNU coreutils ([uutils/coreutils](https://github.com/uutils/coreutils))
   - `uutils-findutils`: rust implementation of findutils ([uutils/findutils](https://github.com/uutils/findutils))
   - `xi-core`: a modern editor with a backend written in Rust ([google/xi-editor](https://github.com/google/xi-editor))
-  - `xi-tui`: a tui frontend for Xi ([little-dude/xi-tui](https://github.com/little-dude/xi-tui))
+  - `xi-term`: a terminal frontend for Xi ([xi-frontend/xi-term](https://github.com/xi-frontend/xi-term))
   - more packages in the [MesaLock Linux Package](https://github.com/mesalock-linux/packages) project
 
 ## Contributing

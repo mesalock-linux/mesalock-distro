@@ -37,7 +37,7 @@ packages=(filesystem \
           # fd-find \
           # tzdata \
           # xi-core \
-          # xi-tui \
+          # xi-term \
           # uutils-findutils \
           # tokei \
           # brotli \
