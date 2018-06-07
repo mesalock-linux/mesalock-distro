@@ -15,6 +15,9 @@ RUN apt-get update && \
         parallel \
         pigz \
         cpio \
+        bison \
+        flex \
+        libelf-dev \
         xorriso \
         fakeroot \
         syslinux-utils \
@@ -54,4 +57,4 @@ RUN pip install wheel
 RUN pip install sphinx
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup override set nightly-2018-01-14
+    rustup default 1.26.2
