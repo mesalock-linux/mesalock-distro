@@ -56,5 +56,6 @@ RUN apt-get install -q -y --no-install-recommends \
 RUN pip install wheel
 RUN pip install sphinx
 
-RUN curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup default 1.26.2
+RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
+RUN rustup install nightly-2018-05-30
+RUN rustup default 1.26.2
