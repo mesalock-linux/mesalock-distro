@@ -18,9 +18,8 @@ echo "[+] mesalockiso: installing bootloader and kernel"
 packages=(linux syslinux)
 
 for p in "${packages[@]}"; do
-  tar xkfJ "$builddir/out/$p.tar.xz" -C "$isodir" &
+  tar xfkJ build/"$p"-*/"$p"-*.tar.xz -C "$isodir"
 done
-wait
 
 echo "[+] mesalockiso: installing rootfs"
 packages=(filesystem \
