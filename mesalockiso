@@ -46,7 +46,7 @@ packages=(filesystem \
 rm -rf "$rootfsdir" && mkdir -p "$rootfsdir"
 
 for p in "${packages[@]}"; do
-  tar xfkJ "build/out/$p.tar.xz" -C "$rootfsdir"
+  tar xfkJ build/"$p"-*/"$p"-*.tar.xz -C "$rootfsdir"
 done
 
 echo "[+] mesalockiso: packaging initramfs"

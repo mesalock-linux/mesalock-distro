@@ -2,12 +2,18 @@ pipeline:
   prepare:
     image: plugins/git
     commands:
-      - git clone -b develop https://github.com/mesalock-linux/packages.git ../packages
+      - git clone -b yaml https://github.com/mesalock-linux/packages.git packages
+      - git clone https://github.com/mesalock-linux/mkpkg.git mkpkg
+  build-mkpkg:
+    image: mesalocklinux/build-mesalock-linux
+    pull: true
+    commands:
+      - cd mkpkg && cargo build --release
   build-packages:
     image: mesalocklinux/build-mesalock-linux
     pull: true
     commands:
-      - ./mkpkg
+      - ./build-all.sh
   build-iso:
     image: mesalocklinux/build-mesalock-linux
     pull: true

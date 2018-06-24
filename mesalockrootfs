@@ -25,7 +25,6 @@ packages=(filesystem \
           uutils-findutils \
           tokei \
           brotli \
-          micro \
           pypy \
           mesalock-demo)
 
@@ -33,7 +32,7 @@ rm -rf "$rootfsdir"
 mkdir -p "$rootfsdir"
 
 for p in "${packages[@]}"; do
-  tar xkfJ "$builddir/out/$p.tar.xz" -C "$rootfsdir"
+  tar xkfJ build/"$p"-*/"$p"-*.tar.xz -C "$rootfsdir"
 done
 
 echo "[+] mesalockrootfs: tar and zip rootfs"
