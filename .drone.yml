@@ -11,17 +11,14 @@ pipeline:
       - cd mkpkg && cargo build --release
   build-packages:
     image: mesalocklinux/build-mesalock-linux
-    pull: true
     commands:
       - ./build-all.sh
   build-iso:
     image: mesalocklinux/build-mesalock-linux
-    pull: true
     commands:
       - ./mesalockiso
   build-rootfs:
     image: mesalocklinux/build-mesalock-linux
-    pull: true
     commands:
       - ./mesalockrootfs
   publish-docker-image-develop:
