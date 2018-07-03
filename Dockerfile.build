@@ -53,6 +53,16 @@ RUN apt-get install -q -y --no-install-recommends \
         liblzma-dev \
         libncursesw5-dev
 
+# Dependencies of building MesaLink
+RUN apt-get install -q -y --no-install-recommends \
+        m4 \
+        autoconf \
+        automake \
+        libtool \
+        make \
+        gcc \
+        curl
+
 RUN pip install wheel
 RUN pip install sphinx
 
