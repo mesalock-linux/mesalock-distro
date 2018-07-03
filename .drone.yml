@@ -5,20 +5,20 @@ pipeline:
       - git clone -b yaml https://github.com/mesalock-linux/packages.git packages
       - git clone https://github.com/mesalock-linux/mkpkg.git mkpkg
   build-mkpkg:
-    image: mesalocklinux/build-mesalock-linux
+    image: mesalocklinux/build-mesalock-linux:latest
     pull: true
     commands:
       - cd mkpkg && cargo build --release
   build-packages:
-    image: mesalocklinux/build-mesalock-linux
+    image: mesalocklinux/build-mesalock-linux:latest
     commands:
       - ./build-all.sh
   build-iso:
-    image: mesalocklinux/build-mesalock-linux
+    image: mesalocklinux/build-mesalock-linux:latest
     commands:
       - ./mesalockiso
   build-rootfs:
-    image: mesalocklinux/build-mesalock-linux
+    image: mesalocklinux/build-mesalock-linux:latest
     commands:
       - ./mesalockrootfs
   publish-docker-image-develop:
