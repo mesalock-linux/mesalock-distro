@@ -12,7 +12,7 @@ pipeline:
   build-packages:
     image: mesalocklinux/build-mesalock-linux:latest
     commands:
-      - for pkg in `find packages -name "build.yml"`; do ./mkpkg/target/release/mkpkg --verbose build $pkg || exit 1 done
+      - for pkg in `find packages -name "build.yml"`; do ./mkpkg/target/release/mkpkg --verbose build $pkg || exit 1; done
   build-iso:
     image: mesalocklinux/build-mesalock-linux:latest
     commands:
