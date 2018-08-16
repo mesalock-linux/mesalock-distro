@@ -68,4 +68,4 @@ RUN pip install sphinx
 
 RUN curl https://sh.rustup.rs -sSf | sh -s -- -y
 RUN rustup install nightly-2018-05-30
-RUN rustup default 1.26.2
+RUN rustup default 1.27.2
