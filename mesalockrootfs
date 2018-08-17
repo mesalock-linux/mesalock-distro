@@ -25,7 +25,7 @@ packages=(filesystem \
           uutils-findutils \
           tokei \
           brotli \
-          pypy \
+          mesapy \
           mesalock-demo)
 
 rm -rf "$rootfsdir"
