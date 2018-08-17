@@ -2,7 +2,7 @@ pipeline:
   prepare:
     image: plugins/git
     commands:
-      - git clone -b yaml https://github.com/mesalock-linux/packages.git packages
+      - git clone https://github.com/mesalock-linux/packages.git packages
       - git clone https://github.com/mesalock-linux/mkpkg.git mkpkg
   build-mkpkg:
     image: mesalocklinux/build-mesalock-linux:latest
