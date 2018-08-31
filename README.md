@@ -140,8 +140,7 @@ $ add-apt-repository -y ppa:gophers/archive && \
            golang-1.9-go
 
 $ # install Rust
-$ curl https://sh.rustup.rs -sSf | sh -s -- -y && \
-    rustup override set nightly-2018-01-14
+$ curl https://sh.rustup.rs -sSf | sh -s -- -y
 
 $ # setup PATH
 $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
