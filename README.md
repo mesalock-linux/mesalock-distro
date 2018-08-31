@@ -23,7 +23,7 @@ in the server environment in the future.
 
 To get better functionality along with strong security guarantees, MesaLock
 Linux follows the following rules-of-thumb for hybrid memory-safe architecture
-designing proposed by the [Rust SGX SDK](https://github.com/baidu/rust-sgx-sdk)
+design proposed by the [Rust SGX SDK](https://github.com/baidu/rust-sgx-sdk)
 project.
 
 1. Unsafe components must not taint safe components, especially for public APIs
@@ -54,7 +54,7 @@ image for a container.
 
 #### Clone MesaLock repository
 
-Clone `mesalock-distro` and `pacakges` repositories.
+Clone `mesalock-distro` and `packages` repositories.
 
 ```sh
 $ mkdir mesalock-linux && cd mesalock-linux
@@ -66,8 +66,8 @@ $ cd mesalock-distro
 #### Build in Docker
 
 We provide a `Dockerfile` for building MesaLock Linux with all dependencies
-installed. You can build the docker image first and then in the building
-container environment, you can build packages, live ISO, and rootfs.
+installed. You can build the docker image first and then in the
+container build environment you can build packages, live ISO, and rootfs.
 
 ```sh
 $ docker build --rm -t mesalocklinux/build-mesalock-linux -f Dockerfile.build .
@@ -75,17 +75,17 @@ $ docker run -v $(dirname $(pwd)):/mesalock-linux -w /mesalock-linux/mesalock-di
     -it mesalocklinux/build-mesalock-linux /bin/bash
 ```
 
-The image of building environment are also provided from [Docker
+The image of build environment is also provided from [Docker
 Hub](https://hub.docker.com/r/mesalocklinux/build-mesalock-linux/). You can
 pull and run the container with the repo name `mesalocklinux/build-mesalock-linux`.
 
 #### Build on Ubuntu
 
-You can also build a Ubuntu machine, please install these building dependencies
+You can also build on Ubuntu machine. Please install these build dependencies
 first:
 
 ```sh
-$ # install packages
+# install packages
 $ apt-get update && \
   apt-get install -q -y --no-install-recommends \
            curl \
@@ -109,7 +109,7 @@ $ apt-get update && \
 	   python-setuptools \
            software-properties-common
 
-$ # install dependencies of building pypy
+# install build dependencies for pypy
 $ apt-get install -q -y --no-install-recommends \
         pypy \
         gcc \
@@ -129,27 +129,27 @@ $ apt-get install -q -y --no-install-recommends \
         liblzma-dev \
         libncursesw5-dev
 
-$ # install wheel and sphinx
+# install wheel and sphinx
 $ pip install wheel
 $ pip install sphinx
 
-$ # install Go
+# install Go
 $ add-apt-repository -y ppa:gophers/archive && \
   apt-get update && \
   apt-get install -q -y --no-install-recommends \
            golang-1.9-go
 
-$ # install Rust
+# install Rust
 $ curl https://sh.rustup.rs -sSf | sh -s -- -y && \
     rustup override set nightly-2018-01-14
 
-$ # setup PATH
+# setup PATH
 $ export PATH="$HOME/.cargo/bin:/usr/lib/go-1.9/bin:$PATH"
 ```
 
 ### Build packages, live ISO, and rootfs
 
-After installing building dependencies, you can run following commands to build
+After installing build dependencies, you can run following commands to build
 packages, live ISO, and rootfs.
 
   - First build all packages: `./mkpkg`
@@ -183,7 +183,7 @@ MesaLock Linux in a docker container.
   2. Build the docker image: `docker build --rm -t mesalocklinux/mesalock-linux .`
   3. Run the image and expeience MesaLock Linux: `docker run --rm -it mesalocklinux/mesalock-linux`
 
-The latest rootfs image with all pacakges are pushed to [Docker
+The latest rootfs image with all packages is pushed to [Docker
 Hub](https://hub.docker.com/r/mesalocklinux/mesalock-linux/). You can also
 directly run the image with the repo name `mesalocklinux/mesalock-linux`.
 
@@ -219,7 +219,7 @@ follow these instructions.
 
     ```
     $ cd /root/mesalock-demo/rocket-hello-world && ./hello_world
-    $ # or
+    # or
     $ cd /root/mesalock-demo/rocket-tls && ./tls
     ```
 
@@ -243,7 +243,7 @@ find them in the `/root/mesalock-demo/rusty-machine/` directory.
 
 MesaLock Linux provides many packages with memory safety in mind. All user
 space applications are written in Rust and Go. Thanks to the open source
-community, they have crated many useful and high-quality tools. The number of
+community, they have created many useful and high-quality tools. The number of
 packages will increase as the time goes on.
 
   - `brotli`: compression tool written in Rust ([dropbox/rust-brotli](https://github.com/dropbox/rust-brotli))
@@ -259,7 +259,7 @@ packages will increase as the time goes on.
   - `linux`: Linux kernel ([linux](https://www.kernel.org/))
   - `mesalock-demo`: some demo projects (maintained by MesaLock Linux)
   - `mgetty`: getty written in Rust (maintained by MesaLock Linux)
-  - `micro`: modern and intuitive terminal-based text editor in written Go ([zyedidia/micro](https://github.com/zyedidia/micro))
+  - `micro`: modern and intuitive terminal-based text editor written in Go ([zyedidia/micro](https://github.com/zyedidia/micro))
   - `minit`: init written in Rust (maintained by MesaLock Linux)
   - `ripgrep`: ripgrep combines the usability of The Silver Searcher with the raw
     speed of grep, written in Rust ([BurntSushi/ripgrep](https://github.com/BurntSushi/ripgrep))
@@ -274,8 +274,8 @@ packages will increase as the time goes on.
 
 ## Contributing
 
-MesaLock Linux is very young and at an early stage. Some important components
-are still missing or work-in-progress. Building a safe and secure Linux distro
+MesaLock Linux is a very young and at an early stage. Some important components
+are still missing or work-in-progress. Building safe and secure Linux distro
 relies on the whole community, and you are very welcome to contribute to the
 MesaLock Linux project.
 
@@ -283,12 +283,12 @@ You can get involved in various forms:
 
   - Try to use MesaLock Linux, report issue, enhancement suggestions, etc
   - Contribute to MesaLock Linux: optimize development process, improve
-    documents, closing issues, etc
+    documents, close issues, etc
   - Contribute to core packages of MesaLock Linux: improving `minit`, `mgetty`,
     `giproute2`, etc
-  - Writing applications using memory safe programming languages like Rust/Go,
-    and joining the the MesaLock Linux packages
-  - Auditing source code of the MesaLock Linux projects and related packages
+  - Write applications using memory safe programming languages like Rust/Go,
+    and join the the MesaLock Linux packages
+  - Audit source code of the MesaLock Linux projects and related packages
 
 You are welcome to send pull requests and report issues on GitHub. Note that
 the MesaLock Linux project follows the [Git
