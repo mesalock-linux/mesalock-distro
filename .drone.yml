@@ -1,51 +1,30 @@
-pipeline:
-  prepare:
-    image: plugins/git
-    commands:
-      - git clone https://github.com/mesalock-linux/packages.git packages
-      - git clone https://github.com/mesalock-linux/mkpkg.git mkpkg
-  build-mkpkg:
-    image: mesalocklinux/build-mesalock-linux:latest
-    pull: true
-    commands:
-      - cd mkpkg && cargo build --release
-  build-packages:
-    image: mesalocklinux/build-mesalock-linux:latest
-    commands:
-      - for pkg in `find packages -name "build.yml"`; do ./mkpkg/target/release/mkpkg --verbose build $pkg || exit 1; done
-  build-iso:
-    image: mesalocklinux/build-mesalock-linux:latest
-    commands:
-      - ./mesalockiso
-  build-rootfs:
-    image: mesalocklinux/build-mesalock-linux:latest
-    commands:
-      - ./mesalockrootfs
-  publish-docker-image-develop:
-    image: plugins/docker
-    repo: mesalocklinux/mesalock-linux
-    secrets: [ docker_username, docker_password ]
-    tags: [ develop ]
-    when:
-      branch: develop
-      event: push
-  publish-docker-image-latest:
-    image: plugins/docker
-    repo: mesalocklinux/mesalock-linux
-    secrets: [ docker_username, docker_password ]
-    tags: [ latest ]
-    when:
-      branch: master
-      event: push
-  publish-docker-image-tag:
-    image: plugins/docker
-    repo: mesalocklinux/mesalock-linux
-    secrets: [ docker_username, docker_password ]
-    default_tags: true
-    when:
-      event: tag
-  notify:
-    image: drillster/drone-email
-    secrets: [ plugin_host, plugin_username, plugin_password, plugin_from ]
-    when:
-      status: [ success, changed, failure ]
+kind: pipeline
+name: default
+
+steps:
+- name: prepare
+  image: plugins/git
+  commands:
+  - git clone https://github.com/mesalock-linux/packages.git packages
+  - git clone https://github.com/mesalock-linux/mkpkg.git mkpkg
+
+- name: build-mkpkg
+  image: mesalocklinux/build-mesalock-linux:latest
+  pull: always
+  commands:
+  - cd mkpkg && cargo build --release
+
+- name: build-packages
+  image: mesalocklinux/build-mesalock-linux:latest
+  commands:
+  - ./mkpkg/target/release/mkpkg build `find packages -name "build.yml"`
+
+- name: build-iso
+  image: mesalocklinux/build-mesalock-linux:latest
+  commands:
+    - ./mesalockiso
+
+- name: build-rootfs
+  image: mesalocklinux/build-mesalock-linux:latest
+  commands:
+    - ./mesalockrootfs
